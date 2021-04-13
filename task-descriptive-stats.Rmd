@@ -22,7 +22,7 @@ and read the dataset:
 
 ```{r, eval = FALSE}
 setwd("~/work/Teaching/Statistics-2021/task-descriptive-stats")
-birthwt <- read.csv("birthwt.csv")
+birthwt <- read.csv("birthwt.csv", stringsAsFactors = TRUE)
 ```
 
 ```{r load-data, echo = FALSE}

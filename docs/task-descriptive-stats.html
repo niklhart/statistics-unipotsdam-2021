@@ -528,7 +528,7 @@ function showSolution(exercise) {
 <!--Main R markdown file-->
 <p>We consider a dataset on risk factors associated with low infant birth weight (modified from the <code>MASS</code> <strong>R</strong> package). First, we set the working directory and read the dataset:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">setwd</span>(<span class="st">&quot;~/work/Teaching/Statistics-2021/task-descriptive-stats&quot;</span>)</span>
-<span id="cb1-2"><a href="#cb1-2"></a>birthwt &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;birthwt.csv&quot;</span>)</span></code></pre></div>
+<span id="cb1-2"><a href="#cb1-2"></a>birthwt &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;birthwt.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p>The <code>birthwt</code> dataset contains the following columns:</p>
 <ul>
 <li><code>age</code>: mother’s age in years</li>
