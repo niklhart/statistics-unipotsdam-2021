@@ -96,7 +96,7 @@ describing the syntax of graphics. It is one of the most widely of all R package
 
 Here, a brief overview on the syntax of the `ggplot2` package will be given. There
 are a lot of useful online resources for further information; a good starting point is 
-(https://ggplot2.tidyverse.org/)[https://ggplot2.tidyverse.org/].
+[https://ggplot2.tidyverse.org/](https://ggplot2.tidyverse.org/).
 
 Before starting, install (if not yet done) and load the package:
 

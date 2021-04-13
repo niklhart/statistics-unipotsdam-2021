@@ -16,7 +16,7 @@ Make sure to be familiar with the `$` operator for data frames (tutorial "Subset
 We will take the "birthwt" dataset as an example:
 
 ```{r}
-birthwt <- read.csv("birthwt.csv")     # see tutorial "Data import/export"
+birthwt <- read.csv("birthwt.csv", stringsAsFactors = TRUE) # see tutorial "Data import/export"
 ```
 
 ## Summarizing a data frame

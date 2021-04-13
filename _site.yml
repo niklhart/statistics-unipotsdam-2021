@@ -7,8 +7,6 @@ navbar:
     - text: "R tutorials"
       menu:
         - text: "R fundamentals"
-        - text: "Getting started"
-          href: installation.html
         - text: "Basic syntax"
           href: basics.html
         - text: "Data types"

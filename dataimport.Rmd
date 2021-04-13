@@ -46,7 +46,8 @@ customize the import. The most important are listed below:
 - `stringsAsFactors`: if `TRUE`, all character columns are treated as factors, 
   rather than character vectors. Again, this is often appropriate, but some 
   characters like ID labels are not appropriately treated as factors. Hence, 
-  some post processing might be required.
+  some post processing might be required. With R version 4.0.0, the default for 
+  `stringsAsFactors` changed from `TRUE` to `FALSE`.
 
 ## Data export
 

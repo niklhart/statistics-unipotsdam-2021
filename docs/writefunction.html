@@ -451,9 +451,6 @@ div.tocify {
   <ul class="dropdown-menu" role="menu">
     <li class="dropdown-header">R fundamentals</li>
     <li>
-      <a href="installation.html">Getting started</a>
-    </li>
-    <li>
       <a href="basics.html">Basic syntax</a>
     </li>
     <li>
@@ -552,10 +549,10 @@ div.tocify {
 <span id="cb8-3"><a href="#cb8-3"></a>    <span class="kw">paste</span>(<span class="st">&quot;Current time:&quot;</span>, str)</span>
 <span id="cb8-4"><a href="#cb8-4"></a>}</span>
 <span id="cb8-5"><a href="#cb8-5"></a><span class="kw">report_time</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;Current time: Tue Apr 13 10:23:25 2021&quot;</code></pre>
+<pre><code>## [1] &quot;Current time: Tue Apr 13 10:59:56 2021&quot;</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">Sys.sleep</span>(<span class="dv">1</span>)    <span class="co"># wait for 1 sec</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a><span class="kw">report_time</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;Current time: Tue Apr 13 10:23:26 2021&quot;</code></pre>
+<pre><code>## [1] &quot;Current time: Tue Apr 13 10:59:57 2021&quot;</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>A function calling another function on a fixed numeric vector</li>
 </ol>
@@ -607,7 +604,7 @@ div.tocify {
 <span id="cb20-10"><a href="#cb20-10"></a>}</span>
 <span id="cb20-11"><a href="#cb20-11"></a>tend   &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()</span>
 <span id="cb20-12"><a href="#cb20-12"></a>tend <span class="op">-</span><span class="st"> </span>tstart         <span class="co"># check the runtime</span></span></code></pre></div>
-<pre><code>## Time difference of 1.01219 secs</code></pre>
+<pre><code>## Time difference of 1.021596 secs</code></pre>
 <p>In these cases, it is preferrable to perform the task once outside the function:</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>tstart &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()</span>
 <span id="cb22-2"><a href="#cb22-2"></a>data &lt;-<span class="st"> </span>{<span class="kw">Sys.sleep</span>(<span class="fl">0.1</span>); <span class="dv">4</span>}</span>
@@ -619,7 +616,7 @@ div.tocify {
 <span id="cb22-8"><a href="#cb22-8"></a>}    </span>
 <span id="cb22-9"><a href="#cb22-9"></a>tend   &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()</span>
 <span id="cb22-10"><a href="#cb22-10"></a>tend <span class="op">-</span><span class="st"> </span>tstart        </span></code></pre></div>
-<pre><code>## Time difference of 0.1114371 secs</code></pre>
+<pre><code>## Time difference of 0.1124129 secs</code></pre>
 </div>
 
 

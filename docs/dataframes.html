@@ -451,9 +451,6 @@ div.tocify {
   <ul class="dropdown-menu" role="menu">
     <li class="dropdown-header">R fundamentals</li>
     <li>
-      <a href="installation.html">Getting started</a>
-    </li>
-    <li>
       <a href="basics.html">Basic syntax</a>
     </li>
     <li>
@@ -526,7 +523,7 @@ div.tocify {
 </ul>
 <p>Make sure to be familiar with the <code>$</code> operator for data frames (tutorial “Subsetting”)</p>
 <p>We will take the “birthwt” dataset as an example:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>birthwt &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;birthwt.csv&quot;</span>)     <span class="co"># see tutorial &quot;Data import/export&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>birthwt &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;birthwt.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">TRUE</span>) <span class="co"># see tutorial &quot;Data import/export&quot;</span></span></code></pre></div>
 <div id="summarizing-a-data-frame" class="section level2">
 <h2>Summarizing a data frame</h2>
 <p>For a small data frame, you can simply type its name at the console and have a look at its contents. However, for larger data frames, a more compact summary is useful:</p>
@@ -542,20 +539,13 @@ div.tocify {
 ## 6  21 124            other    no no   0 2622</code></pre></li>
 <li><p><code>summary</code> computes a summary statistic for each column in the data frame. The type of summary depends on the type of column (e.g., numeric or factor):</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">summary</span>(birthwt)</span></code></pre></div>
-<pre><code>##       age             lwt            race              smoke                ht                 ftv        
-##  Min.   :14.00   Min.   : 80.0   Length:189         Length:189         Length:189         Min.   :0.0000  
-##  1st Qu.:19.00   1st Qu.:110.0   Class :character   Class :character   Class :character   1st Qu.:0.0000  
-##  Median :23.00   Median :121.0   Mode  :character   Mode  :character   Mode  :character   Median :0.0000  
-##  Mean   :23.24   Mean   :129.8                                                            Mean   :0.7937  
-##  3rd Qu.:26.00   3rd Qu.:140.0                                                            3rd Qu.:1.0000  
-##  Max.   :45.00   Max.   :250.0                                                            Max.   :6.0000  
-##       bwt      
-##  Min.   : 709  
-##  1st Qu.:2414  
-##  Median :2977  
-##  Mean   :2945  
-##  3rd Qu.:3487  
-##  Max.   :4990</code></pre></li>
+<pre><code>##       age             lwt                      race    smoke       ht           ftv              bwt      
+##  Min.   :14.00   Min.   : 80.0   african-american:26   no :115   no :177   Min.   :0.0000   Min.   : 709  
+##  1st Qu.:19.00   1st Qu.:110.0   other           :67   yes: 74   yes: 12   1st Qu.:0.0000   1st Qu.:2414  
+##  Median :23.00   Median :121.0   white           :96                       Median :0.0000   Median :2977  
+##  Mean   :23.24   Mean   :129.8                                             Mean   :0.7937   Mean   :2945  
+##  3rd Qu.:26.00   3rd Qu.:140.0                                             3rd Qu.:1.0000   3rd Qu.:3487  
+##  Max.   :45.00   Max.   :250.0                                             Max.   :6.0000   Max.   :4990</code></pre></li>
 </ol>
 </div>
 <div id="adding-removing-columns" class="section level2">

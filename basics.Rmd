@@ -2,7 +2,30 @@
 title: "Basic syntax of the R language"
 ---
 
-## Commands 
+## R code
+
+### Coding in R
+
+R code is organized in *scripts*. Scripts are files ending in `.R` and can 
+contain R code and comments (preceded by `#`), e.g. a file `myfile.R` containing
+
+```{r, eval = FALSE}
+1 + 1 # an easy summation
+```
+
+In RStudio, a new script is created by clicking on `File/New File/R Script` or  
+the `+` sign at the top left of the IDE.
+
+### Running R code in RStudio
+
+R code can be run at the console (by typing `Enter`) or from an R script:
+
+* per line or per selection by clicking on `Run` 
+* entire R files can be `source`'d, running `source("myfile.R")` either on the 
+  command line or from another R script (not covered in these tutorials)
+
+
+### R commands 
 
 R is an interpreted language, and commands inside a script are parsed line by 
 line. Long commands can be split into several lines, but you have to make sure that 

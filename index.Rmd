@@ -23,8 +23,7 @@ The following topics are covered in the R tutorials:
 
 Tutorial            | Topic
 --------------------|:-----------------------------------------------
-Getting started     | RStudio, R scripts, cheatsheets.
-Basic syntax        | Commands, operators (`<-`/`:`/numeric/comparison/logical/`()`/`{}`), R help
+Basic syntax        | Scripts and commands, operators (`<-`/`:`/numeric/comparison/logical/`()`/`{}`), R help
 Data types          | Vectors, factors, matrices, data frames, lists and functions
 Subsetting          | Subsetting operators `[` / `[[` / `$`, numeric/logical/character subsetting, subassignments
 Control flow        | `if`/`else` statements, `for`/`while` loops
