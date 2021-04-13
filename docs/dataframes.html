@@ -25,6 +25,15 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
@@ -146,6 +155,7 @@ h6 {
   text-align: left;
 }
 </style>
+
 
 
 
@@ -425,7 +435,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">PharMetrX A5 module 2020</a>
+      <a class="navbar-brand" href="index.html">Statistics module 2021</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -440,6 +450,9 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li class="dropdown-header">R fundamentals</li>
+    <li>
+      <a href="installation.html">Getting started</a>
+    </li>
     <li>
       <a href="basics.html">Basic syntax</a>
     </li>
@@ -480,18 +493,12 @@ div.tocify {
       <a href="probability.html">Probability &amp; Sampling</a>
     </li>
     <li>
-      <a href="odes.html">Solving ODEs</a>
-    </li>
-    <li>
       <a href="optimization.html">Optimization</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="task-descriptive-stats.html">Task 1: Descriptive statistics</a>
-</li>
-<li>
-  <a href="task-sampling-distr.html">Task 2: Sampling distribution</a>
+  <a href="task-descriptive-stats.html">Descriptive statistics</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -535,20 +542,20 @@ div.tocify {
 ## 6  21 124            other    no no   0 2622</code></pre></li>
 <li><p><code>summary</code> computes a summary statistic for each column in the data frame. The type of summary depends on the type of column (e.g., numeric or factor):</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">summary</span>(birthwt)</span></code></pre></div>
-<pre><code>##       age             lwt                      race    smoke       ht     
-##  Min.   :14.00   Min.   : 80.0   african-american:26   no :115   no :177  
-##  1st Qu.:19.00   1st Qu.:110.0   other           :67   yes: 74   yes: 12  
-##  Median :23.00   Median :121.0   white           :96                      
-##  Mean   :23.24   Mean   :129.8                                            
-##  3rd Qu.:26.00   3rd Qu.:140.0                                            
-##  Max.   :45.00   Max.   :250.0                                            
-##       ftv              bwt      
-##  Min.   :0.0000   Min.   : 709  
-##  1st Qu.:0.0000   1st Qu.:2414  
-##  Median :0.0000   Median :2977  
-##  Mean   :0.7937   Mean   :2945  
-##  3rd Qu.:1.0000   3rd Qu.:3487  
-##  Max.   :6.0000   Max.   :4990</code></pre></li>
+<pre><code>##       age             lwt            race              smoke                ht                 ftv        
+##  Min.   :14.00   Min.   : 80.0   Length:189         Length:189         Length:189         Min.   :0.0000  
+##  1st Qu.:19.00   1st Qu.:110.0   Class :character   Class :character   Class :character   1st Qu.:0.0000  
+##  Median :23.00   Median :121.0   Mode  :character   Mode  :character   Mode  :character   Median :0.0000  
+##  Mean   :23.24   Mean   :129.8                                                            Mean   :0.7937  
+##  3rd Qu.:26.00   3rd Qu.:140.0                                                            3rd Qu.:1.0000  
+##  Max.   :45.00   Max.   :250.0                                                            Max.   :6.0000  
+##       bwt      
+##  Min.   : 709  
+##  1st Qu.:2414  
+##  Median :2977  
+##  Mean   :2945  
+##  3rd Qu.:3487  
+##  Max.   :4990</code></pre></li>
 </ol>
 </div>
 <div id="adding-removing-columns" class="section level2">
@@ -636,7 +643,7 @@ div.tocify {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();

@@ -25,6 +25,15 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
@@ -146,6 +155,7 @@ h6 {
   text-align: left;
 }
 </style>
+
 
 
 
@@ -425,7 +435,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">PharMetrX A5 module 2020</a>
+      <a class="navbar-brand" href="index.html">Statistics module 2021</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -440,6 +450,9 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li class="dropdown-header">R fundamentals</li>
+    <li>
+      <a href="installation.html">Getting started</a>
+    </li>
     <li>
       <a href="basics.html">Basic syntax</a>
     </li>
@@ -480,18 +493,12 @@ div.tocify {
       <a href="probability.html">Probability &amp; Sampling</a>
     </li>
     <li>
-      <a href="odes.html">Solving ODEs</a>
-    </li>
-    <li>
       <a href="optimization.html">Optimization</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="task-descriptive-stats.html">Task 1: Descriptive statistics</a>
-</li>
-<li>
-  <a href="task-sampling-distr.html">Task 2: Sampling distribution</a>
+  <a href="task-descriptive-stats.html">Descriptive statistics</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -530,7 +537,7 @@ div.tocify {
 <p>Let’s give an example:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>)         <span class="co"># normally distributed pseudorandom number</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a>x</span></code></pre></div>
-<pre><code>## [1] -0.02385165</code></pre>
+<pre><code>## [1] -1.195123</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="cf">if</span> (x <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
 <span id="cb5-2"><a href="#cb5-2"></a>    <span class="kw">print</span>(<span class="st">&quot;x is positive&quot;</span>)</span>
 <span id="cb5-3"><a href="#cb5-3"></a>} <span class="cf">else</span> {    </span>
@@ -554,7 +561,7 @@ div.tocify {
 <span id="cb9-5"><a href="#cb9-5"></a>} <span class="cf">else</span> {</span>
 <span id="cb9-6"><a href="#cb9-6"></a>    <span class="kw">print</span>(<span class="st">&quot;x is less than -1&quot;</span>)</span>
 <span id="cb9-7"><a href="#cb9-7"></a>}</span></code></pre></div>
-<pre><code>## [1] &quot;x is in [-1,1]&quot;</code></pre>
+<pre><code>## [1] &quot;x is less than -1&quot;</code></pre>
 <p>A <code>switch</code> provides another way of control flow between any number of cases (not covered in this tutorial).</p>
 </div>
 <div id="loops" class="section level2">
@@ -616,7 +623,7 @@ div.tocify {
 <span id="cb18-8"><a href="#cb18-8"></a>    }</span>
 <span id="cb18-9"><a href="#cb18-9"></a>}</span>
 <span id="cb18-10"><a href="#cb18-10"></a>nfail</span></code></pre></div>
-<pre><code>## [1] 14</code></pre>
+<pre><code>## [1] 23</code></pre>
 </div>
 </div>
 
@@ -631,7 +638,7 @@ div.tocify {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();

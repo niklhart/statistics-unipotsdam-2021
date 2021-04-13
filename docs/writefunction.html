@@ -25,6 +25,15 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
@@ -146,6 +155,7 @@ h6 {
   text-align: left;
 }
 </style>
+
 
 
 
@@ -425,7 +435,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">PharMetrX A5 module 2020</a>
+      <a class="navbar-brand" href="index.html">Statistics module 2021</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -440,6 +450,9 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li class="dropdown-header">R fundamentals</li>
+    <li>
+      <a href="installation.html">Getting started</a>
+    </li>
     <li>
       <a href="basics.html">Basic syntax</a>
     </li>
@@ -480,18 +493,12 @@ div.tocify {
       <a href="probability.html">Probability &amp; Sampling</a>
     </li>
     <li>
-      <a href="odes.html">Solving ODEs</a>
-    </li>
-    <li>
       <a href="optimization.html">Optimization</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="task-descriptive-stats.html">Task 1: Descriptive statistics</a>
-</li>
-<li>
-  <a href="task-sampling-distr.html">Task 2: Sampling distribution</a>
+  <a href="task-descriptive-stats.html">Descriptive statistics</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -545,10 +552,10 @@ div.tocify {
 <span id="cb8-3"><a href="#cb8-3"></a>    <span class="kw">paste</span>(<span class="st">&quot;Current time:&quot;</span>, str)</span>
 <span id="cb8-4"><a href="#cb8-4"></a>}</span>
 <span id="cb8-5"><a href="#cb8-5"></a><span class="kw">report_time</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;Current time: Thu Aug 27 07:54:20 2020&quot;</code></pre>
+<pre><code>## [1] &quot;Current time: Tue Apr 13 10:23:25 2021&quot;</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">Sys.sleep</span>(<span class="dv">1</span>)    <span class="co"># wait for 1 sec</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a><span class="kw">report_time</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;Current time: Thu Aug 27 07:54:21 2020&quot;</code></pre>
+<pre><code>## [1] &quot;Current time: Tue Apr 13 10:23:26 2021&quot;</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>A function calling another function on a fixed numeric vector</li>
 </ol>
@@ -600,7 +607,7 @@ div.tocify {
 <span id="cb20-10"><a href="#cb20-10"></a>}</span>
 <span id="cb20-11"><a href="#cb20-11"></a>tend   &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()</span>
 <span id="cb20-12"><a href="#cb20-12"></a>tend <span class="op">-</span><span class="st"> </span>tstart         <span class="co"># check the runtime</span></span></code></pre></div>
-<pre><code>## Time difference of 1.048787 secs</code></pre>
+<pre><code>## Time difference of 1.01219 secs</code></pre>
 <p>In these cases, it is preferrable to perform the task once outside the function:</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>tstart &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()</span>
 <span id="cb22-2"><a href="#cb22-2"></a>data &lt;-<span class="st"> </span>{<span class="kw">Sys.sleep</span>(<span class="fl">0.1</span>); <span class="dv">4</span>}</span>
@@ -612,7 +619,7 @@ div.tocify {
 <span id="cb22-8"><a href="#cb22-8"></a>}    </span>
 <span id="cb22-9"><a href="#cb22-9"></a>tend   &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()</span>
 <span id="cb22-10"><a href="#cb22-10"></a>tend <span class="op">-</span><span class="st"> </span>tstart        </span></code></pre></div>
-<pre><code>## Time difference of 0.1101031 secs</code></pre>
+<pre><code>## Time difference of 0.1114371 secs</code></pre>
 </div>
 
 
@@ -626,7 +633,7 @@ div.tocify {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();

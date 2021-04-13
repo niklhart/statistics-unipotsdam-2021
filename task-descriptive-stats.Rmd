@@ -21,12 +21,12 @@ We consider a dataset on risk factors associated with low infant birth weight
 and read the dataset:
 
 ```{r, eval = FALSE}
-setwd("~/work/Teaching/PharmetrX/A5_2020/hands on/task-descriptive-stats")
+setwd("~/work/Teaching/Statistics-2021/task-descriptive-stats")
 birthwt <- read.csv("birthwt.csv")
 ```
 
 ```{r load-data, echo = FALSE}
-birthwt <- read.csv("birthwt.csv")
+birthwt <- read.csv("birthwt.csv", stringsAsFactors = TRUE)
 ```
 
 The `birthwt` dataset contains the following columns:
@@ -178,14 +178,13 @@ Disadvantages:
 Generally, a discrete variable is summarized by counting number of datapoints
 in each category; this information can be displayed directly as a *table* 
 (either absolute or relative frequencies) or 
-graphically as a *barplot* or a (discrete) *dot plot*.
+graphically as a *barplot*.
 
 ```{r disp-single-discrete}
 race <- birthwt$race
 table(race)                 # absolute frequencies
 table(race)/length(race)    # relative frequencies
 barplot(table(race))
-dotchart(table(race))
 ```
 
 * Discrete *numeric* variables (i.e., count data) can be further summarized 
@@ -406,99 +405,6 @@ head(catftv)
 
 ------------------------------------------------------------
 
-## Relationship between three variables
-
-### Three (or more) continuous
-    
-A *scatterplot matrix* of several continuous variables is a matrix of 
-scatterplots for each possible combination of continuous variables.
-
-```{r}
-plot(birthwt[c('bwt','lwt','age')])
-```
-
-Advantages:  
-
-* Generalizes to an arbitrary number of continuous variables
-* Alternatives are worse (3D point plots...)
-
-Disadvantages:  
-
-* Fails to accurately represent associations if several covariates are collinear
-  (this effect is called "confounding")
-
-------------------------------------------------------------
-  
-### Two continuous, one discrete
-    
-All data can be shown in a scatterplot, with groups encoded by symbols or 
-colors (or both). 
-
-```{r}
-plot(birthwt$age,birthwt$bwt, 
-     col = birthwt$race, 
-     pch = as.numeric(birthwt$race),
-     xlab = "Mother's age in years",
-     ylab = "Birthweight in grams")
-legend("bottomright", legend = unique(as.character(birthwt$race)), 
-       col = unique(birthwt$race), 
-       pch = unique(as.numeric(birthwt$race)))
-```
-
-Alternatively, "small multiples" can be shown (a row/column/matrix of 
-subfigures, each with a common scale).
-
-------------------------------------------------------------
-
-### One continuous, two discrete
-
-The most common graphical representation is a set of small multiples 
-(corresponding to one discrete variable), each with a suitable representation 
-of one continuous and one discrete variable (see above). This is difficult to do
-in base **R**, therefore one best uses a dedicated **R** package, e.g. `ggplot2`:
-
-```{r}
-ggplot(birthwt, aes(x=smoke, y=bwt)) + facet_wrap("race") + geom_boxplot()
-```
-
-Usually, a confounder creates the small multiples, whereas the variable of 
-interest is displayed within these.
-
-------------------------------------------------------------
-
-### Three discrete
-
-Three discrete variables can also be summarized via their 3D
-*joint frequency table*: 
-
-```{r}
-table(race=birthwt$race, smoke=birthwt$smoke, ht=birthwt$ht)
-```
-
-To reduce this to a 2D representation (e.g., for a publication/report), 
-a nested table can be created. In theory, mosaic plots could be 
-created for three variables, but these are almost impossible to understand.
-
-------------------------------------------------------------
-
-## Repeated measurements data
-
-Lastly, we consider a scenario where repeated measurements are taken 
-(longitudinal instead of cross-sectional data). In this case, observations are 
-linked by a line. Data pertaining to different time series of measurements are 
-not connected. This is difficult to do in base **R**, therefore one best uses a
-dedicated  **R** package, e.g. `ggplot2`:
-
-```{r}
-ggplot(Indometh, aes(x=time,y=conc,group=Subject)) + geom_line() + geom_point()
-```
-
-Grouping of repeated measurement series can be done with one of the techniques
-described above for discrete variables, e.g. *coloring* or 
-*small multiples*.
-
-------------------------------------------------------------
-
 ## Further exercises
 
 1)  Represent the following relationships appropriately:  
@@ -533,47 +439,3 @@ described above for discrete variables, e.g. *coloring* or
     ```
     </div>
 
-2)  Consider the `anscombe` datasets in base R. This data frame contains eight columns,
-    `x1`-`x4` and `y1`-`y4`. Create four different datasets from it, the first containing
-    columns `x1`,`y1`, the second `x2`,`y2`, etc. Then do the following:
-    * Compute numerical summary statistics of these four datasets. Which pattern
-      do you observe?
-    * Visualize the four datasets graphically. What can you conclude?
-    
-    <!--Solution to exercise E-2-->
-    <button onclick='showSolution("solutionExE2")'>Show/hide solution</button>
-    <div id="solutionExE2" style = "display:none">
-    Answer: sample mean and sd for both variables, as well as their empirical 
-    correlation coefficient, agree for all 4 datasets. However, as can be seen 
-    from the graphics, the four datasets are completely different! These 
-    examples illustrate the usefulness of graphical analysis and the danger when
-    solely presenting summary statistics.
-    </div>
-    
-3)  Imagine two variables, one of them representing count data and
-    the other one either categorical or continuous data. Determine an 
-    appropriate joint graphical representation of the two variables, assuming  
-    * the range of counts is very small (say, 3)
-    * the range of counts is very large (say, 100)
-    * the range of counts is somewhere in between (say, 10)  
-    (In total, there are six scenarios to consider, e.g. 
-    "other variable is categorical" and "small range of counts")
-    
-    <!--Solution to exercise E-3-->
-    <button onclick='showSolution("solutionExE3")'>Show/hide solution</button>
-    <div id="solutionExE3" style = "display:none">
-    Answer:
-    
-    * small range of counts, other variable is categorical: 
-      joint frequency table using raw counts
-    * small range of counts, other variable is continuous:
-      one boxplot / stripchart of other variable per count
-    * medium range of counts: first categorize to smaller number of categories,
-      then proceed as described for small range of counts.
-    * large range of counts, other variable is categorical: one boxplot / stripchart
-      of counts per category
-    * large range of counts, other variable is continuous: scatterplot
-    
-    </div>
-
- 

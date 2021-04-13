@@ -25,6 +25,15 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
@@ -146,6 +155,7 @@ h6 {
   text-align: left;
 }
 </style>
+
 
 
 
@@ -425,7 +435,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">PharMetrX A5 module 2020</a>
+      <a class="navbar-brand" href="index.html">Statistics module 2021</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -440,6 +450,9 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li class="dropdown-header">R fundamentals</li>
+    <li>
+      <a href="installation.html">Getting started</a>
+    </li>
     <li>
       <a href="basics.html">Basic syntax</a>
     </li>
@@ -480,18 +493,12 @@ div.tocify {
       <a href="probability.html">Probability &amp; Sampling</a>
     </li>
     <li>
-      <a href="odes.html">Solving ODEs</a>
-    </li>
-    <li>
       <a href="optimization.html">Optimization</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="task-descriptive-stats.html">Task 1: Descriptive statistics</a>
-</li>
-<li>
-  <a href="task-sampling-distr.html">Task 2: Sampling distribution</a>
+  <a href="task-descriptive-stats.html">Descriptive statistics</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -522,23 +529,23 @@ div.tocify {
 <p>To import data from a <code>.csv</code> file, use function <code>read.csv()</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;birthwt.csv&quot;</span>)   <span class="co"># see tutorial &quot;Manipulating data frames&quot;</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw">summary</span>(df)                     <span class="co"># for more information about this dataset </span></span></code></pre></div>
-<pre><code>##       age             lwt                      race    smoke       ht     
-##  Min.   :14.00   Min.   : 80.0   african-american:26   no :115   no :177  
-##  1st Qu.:19.00   1st Qu.:110.0   other           :67   yes: 74   yes: 12  
-##  Median :23.00   Median :121.0   white           :96                      
-##  Mean   :23.24   Mean   :129.8                                            
-##  3rd Qu.:26.00   3rd Qu.:140.0                                            
-##  Max.   :45.00   Max.   :250.0                                            
-##       ftv              bwt      
-##  Min.   :0.0000   Min.   : 709  
-##  1st Qu.:0.0000   1st Qu.:2414  
-##  Median :0.0000   Median :2977  
-##  Mean   :0.7937   Mean   :2945  
-##  3rd Qu.:1.0000   3rd Qu.:3487  
-##  Max.   :6.0000   Max.   :4990</code></pre>
+<pre><code>##       age             lwt            race              smoke                ht                 ftv        
+##  Min.   :14.00   Min.   : 80.0   Length:189         Length:189         Length:189         Min.   :0.0000  
+##  1st Qu.:19.00   1st Qu.:110.0   Class :character   Class :character   Class :character   1st Qu.:0.0000  
+##  Median :23.00   Median :121.0   Mode  :character   Mode  :character   Mode  :character   Median :0.0000  
+##  Mean   :23.24   Mean   :129.8                                                            Mean   :0.7937  
+##  3rd Qu.:26.00   3rd Qu.:140.0                                                            3rd Qu.:1.0000  
+##  Max.   :45.00   Max.   :250.0                                                            Max.   :6.0000  
+##       bwt      
+##  Min.   : 709  
+##  1st Qu.:2414  
+##  Median :2977  
+##  Mean   :2945  
+##  3rd Qu.:3487  
+##  Max.   :4990</code></pre>
 <p>The file can be specified using either an <em>absolute path</em> or a <em>relative path</em> with respect to your current working directory. Above, a relative path was used, we can see that the dataset was indeed in this folder:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">getwd</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;/Users/nhartung/work/Lehre/PharmetrX/A5_2020/R-Tutorials&quot;</code></pre>
+<pre><code>## [1] &quot;/Users/niklashartung/work/Lehre/Potsdam/2021 - SS/Statistik Math 2021/R-Tutorials&quot;</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">list.files</span>(<span class="kw">getwd</span>(), <span class="dt">pattern =</span> <span class="st">&quot;*.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;birthwt.csv&quot;</code></pre>
 <p>You can also use the absolute path, or set the working directory via function <code>setwd()</code>. Note that on Windows, you have to replace <code>\</code> in path names by <code>/</code>.</p>
@@ -581,7 +588,7 @@ div.tocify {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
