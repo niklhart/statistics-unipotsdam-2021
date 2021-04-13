@@ -1,0 +1,98 @@
+---
+title: "Optimization"
+---
+
+This tutorial describes how to perform numerical optimization in R. In general,
+an optimizer takes a one-argument function $f(p)$ and an initial guess $p_0$ and tries
+to find a minimum of $f$, i.e. a value $p^*$ such that $f(p^*)\le f(p)$:
+
+- for all valid $p$ (global optimization), 
+- or for all $p$ in a neighbourhood of $p^*$ (local optimization).
+
+## Syntax for objective function
+
+Since all R optimizers perform minimization, you have to encode your problem such that 
+a minimum is sought (for example, in maximum likelihood estimation, the *negative* 
+log-likelihood must be provided).
+
+We take a quadratic function in several variables as an easy example, 
+with minimum at $p^*=(1,...,1)$:
+
+```{r}
+OF <- function(p) {
+    sum((p-1)^2) + 3
+}
+```
+
+Here's a one-dimensional representation for illustration:
+
+```{r, echo = FALSE}
+x <- seq(0,3, by = 0.1)
+plot(x, Vectorize(OF)(x), type = "l", xlab = "p", ylab = "OF(p)")
+```
+
+## Syntax of function `optim`
+
+### Basic syntax 
+
+Function `optim` has the following syntax:
+
+```{r, eval = FALSE}
+optim(par, fn)
+```
+
+* `par` is the initial guess
+* `fn` is the function to optimize over, as described above (with a single argument,
+  a vector like `par`)
+
+Let's consider the quadratic function example from before (in 3D):
+
+```{r}
+p0 <- c(0,0,0)   # initial guess
+out <- optim(par = p0, fn = OF)
+```
+
+By default, the Nelder-Mead algorithm is used. Other algorithms can be selected
+using argument `method`; the choice among them is discussed further below.
+
+### Output of `optim`
+
+The output of `optim` is a list; `out$par` contains the estimated parameters 
+(see function help for more details):
+
+```{r}
+out$par
+```
+
+We can see that this value is close to the theoretical solution, $p^*=(1,1,1)$.
+
+### Control arguments
+
+Function `optim` has an argument `control`, which contains more fine-grained 
+control over the optimization. In particular, it allows to change tolerances 
+(`abstol`/`reltol`) as well as the number of iterations (`maxit`). It also allows 
+to define method-specific settings. See the function help for `optim` for more
+details.
+
+## Choice of optimizer
+
+Different optimizers are implemented in function `optim`, with different 
+requirements and properties. Here's an overview:
+
+Algorithm    | Gradient-based? | Optimization type   | Dimension of $p$  | Lower/upper limits
+-------------|-----------------|---------------------|-------------------|--------------------
+`Nelder-Mead`| no              | Local               |  $>1$ recommended | not supported
+`BFGS`       | yes             | Local               |  any              | not supported
+`CG`         | yes             | Local               |  any              | not supported
+`L-BFGS-G`   | yes             | Local               |  any              | optional
+`SANN`       | no              | Global              |  any              | not supported
+`Brent`      | no              | Local               |   1               | mandatory
+
+Notes:
+
+- Gradient-based methods accept an additional argument `gr` (the gradient), which
+  can speed up the optimization considerably.
+- Gradient-free / global methods may have very long runtimes (except for `Brent`)
+- Methods `BFGS`, `CG` and `L-BFGS-G` differ in their memory requirements and update 
+  efficiency. For most problems, `BFGS` is a good choice among them.
+

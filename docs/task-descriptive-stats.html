@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Task 1: Descriptive statistics</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">PharMetrX A5 module 2020</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Overview</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    R tutorials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">R fundamentals</li>
+    <li>
+      <a href="basics.html">Basic syntax</a>
+    </li>
+    <li>
+      <a href="datatypes.html">Data types</a>
+    </li>
+    <li>
+      <a href="subsetting.html">Subsetting</a>
+    </li>
+    <li>
+      <a href="controlflow.html">Control flow</a>
+    </li>
+    <li>
+      <a href="packages.html">R Packages</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">R functions</li>
+    <li>
+      <a href="functioncall.html">Function calls</a>
+    </li>
+    <li>
+      <a href="writefunction.html">Defining a function</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Working with data</li>
+    <li>
+      <a href="dataimport.html">Data import/export</a>
+    </li>
+    <li>
+      <a href="dataframes.html">Manipulating data frames</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Further topics</li>
+    <li>
+      <a href="plotting.html">Plotting</a>
+    </li>
+    <li>
+      <a href="probability.html">Probability &amp; Sampling</a>
+    </li>
+    <li>
+      <a href="odes.html">Solving ODEs</a>
+    </li>
+    <li>
+      <a href="optimization.html">Optimization</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="task-descriptive-stats.html">Task 1: Descriptive statistics</a>
+</li>
+<li>
+  <a href="task-sampling-distr.html">Task 2: Sampling distribution</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Task 1: Descriptive statistics</h1>
+
+</div>
+
+
+<!--JavaScript function for a button to show/hide solutions-->
+<script>
+function showSolution(exercise) {
+    var x = document.getElementById(exercise);
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+</script>
+<!--Main R markdown file-->
+<p>We consider a dataset on risk factors associated with low infant birth weight (modified from the <code>MASS</code> <strong>R</strong> package). First, we set the working directory and read the dataset:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">setwd</span>(<span class="st">&quot;~/work/Teaching/PharmetrX/A5_2020/hands on/task-descriptive-stats&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>birthwt &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;birthwt.csv&quot;</span>)</span></code></pre></div>
+<p>The <code>birthwt</code> dataset contains the following columns:</p>
+<ul>
+<li><code>age</code>: mother’s age in years</li>
+<li><code>lwt</code>: mother’s weight in pounds</li>
+<li><code>race</code>: mother’s race</li>
+<li><code>smoke</code>: smoking status during pregnancy</li>
+<li><code>ht</code>: history of hypertension</li>
+<li><code>ftv</code>: number of physician visits during the first trimester of pregnancy</li>
+<li><code>bwt</code>: birth weight in grams</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">summary</span>(birthwt)</span></code></pre></div>
+<pre><code>##       age             lwt                      race    smoke       ht     
+##  Min.   :14.00   Min.   : 80.0   african-american:26   no :115   no :177  
+##  1st Qu.:19.00   1st Qu.:110.0   other           :67   yes: 74   yes: 12  
+##  Median :23.00   Median :121.0   white           :96                      
+##  Mean   :23.24   Mean   :129.8                                            
+##  3rd Qu.:26.00   3rd Qu.:140.0                                            
+##  Max.   :45.00   Max.   :250.0                                            
+##       ftv              bwt      
+##  Min.   :0.0000   Min.   : 709  
+##  1st Qu.:0.0000   1st Qu.:2414  
+##  Median :0.0000   Median :2977  
+##  Mean   :0.7937   Mean   :2945  
+##  3rd Qu.:1.0000   3rd Qu.:3487  
+##  Max.   :6.0000   Max.   :4990</code></pre>
+<p><strong>Exercise</strong><br />
+Determine the scale of measurement for each variable:</p>
+<ul>
+<li>nominal,</li>
+<li>ordinal,</li>
+<li>count (discrete numeric)</li>
+<li>or continuous?</li>
+</ul>
+<!--Solution to exercise 1-->
+<button onclick="showSolution(&quot;solutionEx1&quot;)">
+Show/hide solution
+</button>
+<div id="solutionEx1" style="display:none">
+<p>Answer:</p>
+<ul>
+<li><code>age</code>: continuous</li>
+<li><code>lwt</code>: continuous</li>
+<li><code>race</code>: nominal</li>
+<li><code>smoke</code>: nominal</li>
+<li><code>ht</code>: nominal</li>
+<li><code>ftv</code>: count</li>
+<li><code>bwt</code>: continuous</li>
+</ul>
+</div>
+<hr />
+<div id="representation-of-a-single-variable" class="section level2">
+<h2>Representation of a single variable</h2>
+<div id="continuous-variable" class="section level3">
+<h3>Continuous variable</h3>
+<div id="numerical-description" class="section level4">
+<h4>Numerical description</h4>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>bwt &lt;-<span class="st"> </span>birthwt<span class="op">$</span>bwt</span></code></pre></div>
+<p>Measures of location</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">mean</span>(bwt)</span></code></pre></div>
+<pre><code>## [1] 2944.587</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">median</span>(bwt)</span></code></pre></div>
+<pre><code>## [1] 2977</code></pre>
+<p>Measures of dispersion</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">sd</span>(bwt)       <span class="co"># (empirical) standard deviation</span></span></code></pre></div>
+<pre><code>## [1] 729.2143</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">var</span>(bwt)      <span class="co"># (empirical) variance</span></span></code></pre></div>
+<pre><code>## [1] 531753.5</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">range</span>(bwt)    <span class="co"># c(min(x), max(x))</span></span></code></pre></div>
+<pre><code>## [1]  709 4990</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">IQR</span>(bwt)      <span class="co"># interquartile range</span></span></code></pre></div>
+<pre><code>## [1] 1073</code></pre>
+<p>Sample quantiles</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">quantile</span>(bwt)                       <span class="co"># default: quartiles </span></span></code></pre></div>
+<pre><code>##   0%  25%  50%  75% 100% 
+##  709 2414 2977 3487 4990</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">quantile</span>(bwt, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.2</span>,<span class="fl">0.8</span>))</span></code></pre></div>
+<pre><code>##    20%    80% 
+## 2341.8 3629.0</code></pre>
+<p>Sample coefficient of variation (measure of dispersion relative to location; dimensionless).</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>cv &lt;-<span class="st"> </span><span class="kw">sd</span>(bwt)<span class="op">/</span><span class="kw">mean</span>(bwt)</span>
+<span id="cb21-2"><a href="#cb21-2"></a>cv</span></code></pre></div>
+<pre><code>## [1] 0.2476457</code></pre>
+<p>Sample mean and sample median both are a measure of location, and sample standard deviation and interquartile range both are a measure of dispersion. The main difference between these measures is that sample mean and sample standard deviation are more affected by outliers than sample median and interquartile range, respectively.</p>
+</div>
+<div id="graphical-description" class="section level4">
+<h4>Graphical description</h4>
+<p>Continuous variables are usually displayed in a <em>histogram</em>, a <em>boxplot</em>, or a <em>dot plot</em> (1D scatter plot).</p>
+<p>A <strong>histogram</strong> groups values into predefined intervals (‘’binning’’) and represents counts in these intervals:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw">hist</span>(bwt)                <span class="co"># default intervals</span></span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw">hist</span>(bwt, <span class="dt">breaks =</span> <span class="dv">2</span>)    <span class="co"># coarser intervals</span></span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">hist</span>(bwt, <span class="dt">breaks =</span> <span class="dv">100</span>)  <span class="co"># finer intervals</span></span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-7-3.png" width="672" /></p>
+<p>Advantages:</p>
+<ul>
+<li>multimodality and skewness easy to see</li>
+</ul>
+<p>Disadvantages:</p>
+<ul>
+<li>2D representation of 1D data (difficult to group)</li>
+<li>representation depends on interval width</li>
+</ul>
+<p>A <strong>boxplot</strong> represents summary statistics depending on sample quantiles:</p>
+<ul>
+<li>median</li>
+<li>quartiles</li>
+<li>‘’fences’’
+<ul>
+<li>lower fence: at smallest observation larger than <span class="math inline">\(q_{0.25} - 1.5\cdot IQR\)</span></li>
+<li>upper fence: at largest observation smaller than <span class="math inline">\(q_{0.75} + 1.5\cdot IQR\)</span></li>
+</ul></li>
+<li>outliers (values outside fences, if any)</li>
+</ul>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw">boxplot</span>(bwt)</span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Advantages:</p>
+<ul>
+<li>1D representation of 1D data (can be grouped)</li>
+<li>outliers are easily spotted</li>
+</ul>
+<p>Disadvantages:</p>
+<ul>
+<li>multimodality not visible</li>
+<li>sample size not visible</li>
+</ul>
+<p>A (continuous) <em>dot plot</em> shows individual data points along the x-axis, while scattering (‘’jittering’’) values along the y-axis to avoid overplotting.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="kw">stripchart</span>(bwt, <span class="dt">method =</span> <span class="st">&quot;jitter&quot;</span>)</span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Advantages:</p>
+<ul>
+<li>Shows the actual data!</li>
+<li>‘’almost 1D’’ representation of 1D data (can be grouped)</li>
+</ul>
+<p>Disadvantages:</p>
+<ul>
+<li>only adequate for small datasets</li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="discrete-variable" class="section level3">
+<h3>Discrete variable</h3>
+<p>Generally, a discrete variable is summarized by counting number of datapoints in each category; this information can be displayed directly as a <em>table</em> (either absolute or relative frequencies) or graphically as a <em>barplot</em> or a (discrete) <em>dot plot</em>.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>race &lt;-<span class="st"> </span>birthwt<span class="op">$</span>race</span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="kw">table</span>(race)                 <span class="co"># absolute frequencies</span></span></code></pre></div>
+<pre><code>## race
+## african-american            other            white 
+##               26               67               96</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">table</span>(race)<span class="op">/</span><span class="kw">length</span>(race)    <span class="co"># relative frequencies</span></span></code></pre></div>
+<pre><code>## race
+## african-american            other            white 
+##        0.1375661        0.3544974        0.5079365</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="kw">barplot</span>(<span class="kw">table</span>(race))</span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/disp-single-discrete-1.png" width="672" /></p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="kw">dotchart</span>(<span class="kw">table</span>(race))</span></code></pre></div>
+<pre><code>## Warning in dotchart(table(race)): &#39;x&#39; is neither a vector nor a matrix:
+## using as.numeric(x)</code></pre>
+<p><img src="task-descriptive-stats_files/figure-html/disp-single-discrete-2.png" width="672" /></p>
+<ul>
+<li>Discrete <em>numeric</em> variables (i.e., count data) can be further summarized numerically, similar to continuous variables. In particular we can compute their mean, variance/standard deviation, median (or, more generally, quantiles), minimum/maximum, and interquartile range.</li>
+<li>Rather than using the coefficient of variation, the <em>index of dispersion</em> is often computed (ratio of sample variance to sample mean). It is 1 for Poisson distributed data; when the dispersion index is <span class="math inline">\(&gt;1\)</span>, data are called overdispersed and for a dispersion index <span class="math inline">\(&lt;1\)</span>, they are called underdispersed.</li>
+<li>Count variables with many categories are sometimes displayed as if they were continuous (e.g., via a histogram or boxplot). However, a histogram and a barplot are not the same!</li>
+</ul>
+<p><strong>Exercise</strong></p>
+<p>Classify the frequency of physician visits according to its dispersion index.</p>
+<!--Solution to exercise 2-->
+<button onclick="showSolution(&quot;solutionEx2&quot;)">
+Show/hide solution
+</button>
+<div id="solutionEx2" style="display:none">
+<p>Answer:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="kw">var</span>(birthwt<span class="op">$</span>ftv)<span class="op">/</span><span class="kw">mean</span>(birthwt<span class="op">$</span>ftv)</span></code></pre></div>
+<pre><code>## [1] 1.41383</code></pre>
+<p><span class="math inline">\(\Rightarrow\)</span> dispersion index greater than one, hence frequency of physician visits is overdispersed.</p>
+</div>
+<hr />
+</div>
+<div id="labelling" class="section level3">
+<h3>Labelling</h3>
+<p>It is important to use meaningful axis labels and titles, such as in the following examples:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="kw">barplot</span>(<span class="kw">table</span>(race), <span class="dt">ylab =</span> <span class="st">&quot;Frequency&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Race distribution in the birthwt dataset&quot;</span>)</span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="kw">hist</span>(bwt, <span class="dt">xlab =</span> <span class="st">&quot;Infant birthweight in [g]&quot;</span>, <span class="dt">main =</span>  <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-11-2.png" width="672" /></p>
+<p><strong>Exercise</strong><br />
+Summarize each variable in the <code>birthwt</code> dataset appropriately. Use adequate x/y labels and a title.</p>
+<!--Solution to exercise 3-->
+<button onclick="showSolution(&quot;solutionEx3&quot;)">
+Show/hide solution
+</button>
+<div id="solutionEx3" style="display:none">
+<p>Answer:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="kw">hist</span>(birthwt<span class="op">$</span>age, <span class="dt">xlab =</span> <span class="st">&quot;Age of mother in years&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="kw">hist</span>(birthwt<span class="op">$</span>lwt, <span class="dt">xlab =</span> <span class="st">&quot;Weight of mother in pounds&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-12-2.png" width="672" /></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="kw">barplot</span>(<span class="kw">table</span>(birthwt<span class="op">$</span>race), <span class="dt">xlab =</span> <span class="st">&quot;Mother&#39;s race&quot;</span>)</span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-12-3.png" width="672" /></p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="kw">barplot</span>(<span class="kw">table</span>(birthwt<span class="op">$</span>smoke), <span class="dt">xlab =</span> <span class="st">&quot;Did the mother smoke during pregnancy?&quot;</span>)</span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-12-4.png" width="672" /></p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="kw">barplot</span>(<span class="kw">table</span>(birthwt<span class="op">$</span>ht), <span class="dt">xlab =</span> <span class="st">&quot;Mother with history of hypertension?&quot;</span>)</span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-12-5.png" width="672" /></p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="kw">barplot</span>(<span class="kw">table</span>(birthwt<span class="op">$</span>ftv), <span class="dt">xlab =</span> <span class="st">&quot;Frequency of physician visits in first trimester&quot;</span>)</span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-12-6.png" width="672" /></p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="kw">hist</span>(birthwt<span class="op">$</span>bwt, <span class="dt">xlab =</span> <span class="st">&quot;Birthweight in grams&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-12-7.png" width="672" /></p>
+</div>
+<hr />
+</div>
+</div>
+<div id="relationships-between-two-variables" class="section level2">
+<h2>Relationships between two variables</h2>
+<div id="both-continuous" class="section level3">
+<h3>Both continuous</h3>
+<p>Two continuous variables are best shown in a <em>scatterplot</em>:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="kw">plot</span>(birthwt<span class="op">$</span>age, birthwt<span class="op">$</span>bwt)</span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>The degree of linear association between two continuous variables can be expressed by the empirical correlation coefficient <span class="math inline">\(r\in[-1,1]\)</span>:</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="kw">cor</span>(birthwt<span class="op">$</span>age, birthwt<span class="op">$</span>bwt)</span></code></pre></div>
+<pre><code>## [1] 0.09031781</code></pre>
+<hr />
+</div>
+<div id="one-continuous-one-discrete" class="section level3">
+<h3>One continuous, one discrete</h3>
+<p>The values of <em>non-numeric</em> discrete variables divide the dataset into different groups. For each of these groups, summary statistics can be computed.</p>
+<p>For graphical display, boxplots and dot plots are well suited since they can be placed side by side:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="kw">boxplot</span>(bwt <span class="op">~</span><span class="st"> </span>race)</span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="kw">stripchart</span>(bwt <span class="op">~</span><span class="st"> </span>race, <span class="dt">method =</span> <span class="st">&quot;jitter&quot;</span>)</span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-15-2.png" width="672" /></p>
+<hr />
+</div>
+<div id="both-discrete" class="section level3">
+<h3>Both discrete</h3>
+<p>Two discrete variables are best summarized via a <em>joint frequency table</em>. To avoid potential confusion between variables with the same set of possible values, use named arguments:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>(tab &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="dt">ht=</span>birthwt<span class="op">$</span>ht, <span class="dt">smoke=</span>birthwt<span class="op">$</span>smoke))</span></code></pre></div>
+<pre><code>##      smoke
+## ht     no yes
+##   no  108  69
+##   yes   7   5</code></pre>
+<p>A graphical representation of 2 discrete variables is less commonly used than a tabular representation. One possibility is the <em>mosaic plot</em>:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="kw">mosaicplot</span>(tab)</span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>Alternatively, a <em>small multiples</em> arrangement of <em>dotcharts</em> (in base <strong>R</strong>, the default labelling is unfortunate for both these possibilities).</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="kw">colnames</span>(tab) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#39;smoke: &#39;</span>, <span class="kw">colnames</span>(tab))</span>
+<span id="cb54-2"><a href="#cb54-2"></a><span class="kw">rownames</span>(tab) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#39;ht: &#39;</span>, <span class="kw">rownames</span>(tab))</span>
+<span id="cb54-3"><a href="#cb54-3"></a><span class="kw">dotchart</span>(tab)</span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>… or <em>stacked/grouped barplots</em> (this is difficult to do in base <strong>R</strong>, therefore one best uses a dedicated <strong>R</strong> package, e.g. <code>ggplot2</code>):</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>) <span class="co">#if not done already</span></span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb56-2"><a href="#cb56-2"></a><span class="kw">ggplot</span>(birthwt) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x=</span>smoke, <span class="dt">fill =</span> ht))</span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p><strong>Exercise</strong><br />
+Represent the following relationships appropriately:</p>
+<ul>
+<li><code>race</code> and <code>ht</code></li>
+<li><code>smoke</code> and <code>age</code></li>
+<li><code>ftv</code> and <code>lwt</code></li>
+</ul>
+<!--Solution to exercise 4-->
+<button onclick="showSolution(&quot;solutionEx4&quot;)">
+Show/hide solution
+</button>
+<div id="solutionEx4" style="display:none">
+<p>Answer:</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="kw">table</span>(<span class="dt">race=</span>birthwt<span class="op">$</span>race,<span class="dt">ht=</span>birthwt<span class="op">$</span>ht)</span></code></pre></div>
+<pre><code>##                   ht
+## race               no yes
+##   african-american 23   3
+##   other            63   4
+##   white            91   5</code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a><span class="kw">boxplot</span>(birthwt<span class="op">$</span>age<span class="op">~</span>birthwt<span class="op">$</span>smoke)</span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a><span class="kw">plot</span>(birthwt<span class="op">$</span>ftv,birthwt<span class="op">$</span>lwt, <span class="dt">xlab =</span> <span class="st">&quot;Number of first trimester visits&quot;</span>,</span>
+<span id="cb60-2"><a href="#cb60-2"></a>     <span class="dt">ylab =</span> <span class="st">&quot;Mother&#39;s body weight in pounds&quot;</span>)</span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-21-2.png" width="672" /></p>
+</div>
+<hr />
+</div>
+</div>
+<div id="data-post-processing" class="section level2">
+<h2>Data post-processing</h2>
+<div id="numerical-transformations" class="section level3">
+<h3>Numerical transformations</h3>
+<p>Sometimes a variable is transformed numerically (often, <em>log-transformed</em>) before it is represented numerically or graphically. For illustration, we consider the <code>Animals</code> dataset from the <code>MASS</code> <strong>R</strong> package (body and brain size for different animal species):</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;MASS&quot;</span>) <span class="co">#if not done already</span></span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a>animals &lt;-<span class="st"> </span>MASS<span class="op">::</span>Animals</span>
+<span id="cb62-2"><a href="#cb62-2"></a><span class="kw">plot</span>(animals<span class="op">$</span>body,animals<span class="op">$</span>brain)</span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a><span class="kw">plot</span>(animals<span class="op">$</span>body,animals<span class="op">$</span>brain, <span class="dt">log =</span> <span class="st">&quot;xy&quot;</span>)</span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-23-2.png" width="672" /></p>
+<p><strong>Exercise</strong></p>
+<p>Make sure you understand which summary statistics commute with a monotonously increasing data transformation like the log-transform, and which ones don’t (commutation means that if <span class="math inline">\(T(X)\)</span> is a statistic and <span class="math inline">\(f\)</span> a data transformation, then <span class="math inline">\(f(T(X)) = T(f(X))\)</span>).</p>
+<!--Solution to exercise 5-->
+<button onclick="showSolution(&quot;solutionEx5&quot;)">
+Show/hide solution
+</button>
+<div id="solutionEx5" style="display:none">
+<p>Answer:</p>
+<ul>
+<li>mean, standard deviation/variance and range/IQR don’t commute with transformation</li>
+<li>all quantile-based summary statistics (median, max/min, quartiles) commute with monotonous transformations</li>
+</ul>
+</div>
+<hr />
+</div>
+<div id="subsetting" class="section level3">
+<h3>Subsetting</h3>
+<p>Only a subset of data might be relevant for a particular analysis. Use function <code>subset</code> to create a sub-dataset (see tutorial “Manipulating data frames”).</p>
+<p>For example, we might want to consider only the mothers with hypertension:</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a><span class="kw">subset</span>(birthwt, ht <span class="op">==</span><span class="st"> &quot;yes&quot;</span>)</span></code></pre></div>
+<pre><code>##     age lwt             race smoke  ht ftv  bwt
+## 13   22  95            other    no yes   0 2751
+## 51   22 120            white    no yes   1 3100
+## 93   19 235            white   yes yes   0 3629
+## 102  19 184            white   yes yes   0 3756
+## 106  25 241 african-american    no yes   0 3790
+## 133  34 187 african-american   yes yes   0 1135
+## 134  25 105            other    no yes   0 1330
+## 139  24 132            other    no yes   0 1729
+## 140  21 165            white   yes yes   1 1790
+## 181  26 154            other    no yes   1 2442
+## 188  17 142 african-american    no yes   0 2495
+## 189  21 130            white   yes yes   3 2495</code></pre>
+<hr />
+</div>
+<div id="categorisation" class="section level3">
+<h3>Categorisation</h3>
+<p>Numeric variables (continuous or count) can be categorized into ordinal variables. Unfortunately, there is no such function in base R, but the categorization can be done manually using functions <code>findInterval</code> and <code>factor</code>:</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a>idx &lt;-<span class="st"> </span><span class="kw">findInterval</span>(birthwt<span class="op">$</span>ftv, <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5</span>,<span class="fl">0.5</span>,<span class="fl">1.5</span>)) </span>
+<span id="cb66-2"><a href="#cb66-2"></a>catftv &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;never&quot;</span>,<span class="st">&quot;once&quot;</span>,<span class="st">&quot;several&quot;</span>)[idx], <span class="dt">ordered =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb66-3"><a href="#cb66-3"></a><span class="kw">head</span>(catftv)</span></code></pre></div>
+<pre><code>## [1] never   several once    several never   never  
+## Levels: never &lt; once &lt; several</code></pre>
+<hr />
+</div>
+</div>
+<div id="relationship-between-three-variables" class="section level2">
+<h2>Relationship between three variables</h2>
+<div id="three-or-more-continuous" class="section level3">
+<h3>Three (or more) continuous</h3>
+<p>A <em>scatterplot matrix</em> of several continuous variables is a matrix of scatterplots for each possible combination of continuous variables.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a><span class="kw">plot</span>(birthwt[<span class="kw">c</span>(<span class="st">&#39;bwt&#39;</span>,<span class="st">&#39;lwt&#39;</span>,<span class="st">&#39;age&#39;</span>)])</span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p>Advantages:</p>
+<ul>
+<li>Generalizes to an arbitrary number of continuous variables</li>
+<li>Alternatives are worse (3D point plots…)</li>
+</ul>
+<p>Disadvantages:</p>
+<ul>
+<li>Fails to accurately represent associations if several covariates are collinear (this effect is called “confounding”)</li>
+</ul>
+<hr />
+</div>
+<div id="two-continuous-one-discrete" class="section level3">
+<h3>Two continuous, one discrete</h3>
+<p>All data can be shown in a scatterplot, with groups encoded by symbols or colors (or both).</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a><span class="kw">plot</span>(birthwt<span class="op">$</span>age,birthwt<span class="op">$</span>bwt, </span>
+<span id="cb69-2"><a href="#cb69-2"></a>     <span class="dt">col =</span> birthwt<span class="op">$</span>race, </span>
+<span id="cb69-3"><a href="#cb69-3"></a>     <span class="dt">pch =</span> <span class="kw">as.numeric</span>(birthwt<span class="op">$</span>race),</span>
+<span id="cb69-4"><a href="#cb69-4"></a>     <span class="dt">xlab =</span> <span class="st">&quot;Mother&#39;s age in years&quot;</span>,</span>
+<span id="cb69-5"><a href="#cb69-5"></a>     <span class="dt">ylab =</span> <span class="st">&quot;Birthweight in grams&quot;</span>)</span>
+<span id="cb69-6"><a href="#cb69-6"></a><span class="kw">legend</span>(<span class="st">&quot;bottomright&quot;</span>, <span class="dt">legend =</span> <span class="kw">unique</span>(<span class="kw">as.character</span>(birthwt<span class="op">$</span>race)), </span>
+<span id="cb69-7"><a href="#cb69-7"></a>       <span class="dt">col =</span> <span class="kw">unique</span>(birthwt<span class="op">$</span>race), </span>
+<span id="cb69-8"><a href="#cb69-8"></a>       <span class="dt">pch =</span> <span class="kw">unique</span>(<span class="kw">as.numeric</span>(birthwt<span class="op">$</span>race)))</span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p>Alternatively, “small multiples” can be shown (a row/column/matrix of subfigures, each with a common scale).</p>
+<hr />
+</div>
+<div id="one-continuous-two-discrete" class="section level3">
+<h3>One continuous, two discrete</h3>
+<p>The most common graphical representation is a set of small multiples (corresponding to one discrete variable), each with a suitable representation of one continuous and one discrete variable (see above). This is difficult to do in base <strong>R</strong>, therefore one best uses a dedicated <strong>R</strong> package, e.g. <code>ggplot2</code>:</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="kw">ggplot</span>(birthwt, <span class="kw">aes</span>(<span class="dt">x=</span>smoke, <span class="dt">y=</span>bwt)) <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="st">&quot;race&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p>Usually, a confounder creates the small multiples, whereas the variable of interest is displayed within these.</p>
+<hr />
+</div>
+<div id="three-discrete" class="section level3">
+<h3>Three discrete</h3>
+<p>Three discrete variables can also be summarized via their 3D <em>joint frequency table</em>:</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a><span class="kw">table</span>(<span class="dt">race=</span>birthwt<span class="op">$</span>race, <span class="dt">smoke=</span>birthwt<span class="op">$</span>smoke, <span class="dt">ht=</span>birthwt<span class="op">$</span>ht)</span></code></pre></div>
+<pre><code>## , , ht = no
+## 
+##                   smoke
+## race               no yes
+##   african-american 14   9
+##   other            51  12
+##   white            43  48
+## 
+## , , ht = yes
+## 
+##                   smoke
+## race               no yes
+##   african-american  2   1
+##   other             4   0
+##   white             1   4</code></pre>
+<p>To reduce this to a 2D representation (e.g., for a publication/report), a nested table can be created. In theory, mosaic plots could be created for three variables, but these are almost impossible to understand.</p>
+<hr />
+</div>
+</div>
+<div id="repeated-measurements-data" class="section level2">
+<h2>Repeated measurements data</h2>
+<p>Lastly, we consider a scenario where repeated measurements are taken (longitudinal instead of cross-sectional data). In this case, observations are linked by a line. Data pertaining to different time series of measurements are not connected. This is difficult to do in base <strong>R</strong>, therefore one best uses a dedicated <strong>R</strong> package, e.g. <code>ggplot2</code>:</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a><span class="kw">ggplot</span>(Indometh, <span class="kw">aes</span>(<span class="dt">x=</span>time,<span class="dt">y=</span>conc,<span class="dt">group=</span>Subject)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p>Grouping of repeated measurement series can be done with one of the techniques described above for discrete variables, e.g. <em>coloring</em> or <em>small multiples</em>.</p>
+<hr />
+</div>
+<div id="further-exercises" class="section level2">
+<h2>Further exercises</h2>
+<ol style="list-style-type: decimal">
+<li>Represent the following relationships appropriately:<br />
+</li>
+</ol>
+<ul>
+<li><p><code>smoke</code>, <code>lwt</code> and <code>bwt</code></p></li>
+<li><p><code>age</code> and <code>bwt</code> of mothers smoking during pregnancy</p></li>
+<li><p><code>smoke</code> and <code>bwt</code> of mothers over 30 that never went to a doctor during first trimester of pregnancy</p>
+<p><!--Solution to exercise E-1--> <button onclick='showSolution("solutionExE1")'>Show/hide solution</button></p>
+<div id="solutionExE1" style="display:none">
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a><span class="kw">plot</span>(birthwt<span class="op">$</span>lwt, birthwt<span class="op">$</span>bwt, <span class="dt">col =</span> birthwt<span class="op">$</span>smoke, </span>
+<span id="cb74-2"><a href="#cb74-2"></a>     <span class="dt">xlab =</span> <span class="st">&quot;Mother&#39;s weight in pounds&quot;</span>,</span>
+<span id="cb74-3"><a href="#cb74-3"></a>     <span class="dt">ylab =</span> <span class="st">&quot;Birth weight in grams&quot;</span>,</span>
+<span id="cb74-4"><a href="#cb74-4"></a>     <span class="dt">main =</span> <span class="st">&quot;Stratification by smoking status&quot;</span>)</span>
+<span id="cb74-5"><a href="#cb74-5"></a><span class="kw">legend</span>(<span class="st">&quot;bottomright&quot;</span>, <span class="dt">legend =</span> <span class="kw">unique</span>(<span class="kw">as.character</span>(birthwt<span class="op">$</span>smoke)), </span>
+<span id="cb74-6"><a href="#cb74-6"></a>       <span class="dt">col =</span> <span class="kw">unique</span>(<span class="kw">as.numeric</span>(birthwt<span class="op">$</span>smoke)), <span class="dt">pch =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a>smok &lt;-<span class="st"> </span><span class="kw">subset</span>(birthwt, smoke <span class="op">==</span><span class="st"> &quot;yes&quot;</span>)</span>
+<span id="cb75-2"><a href="#cb75-2"></a><span class="kw">plot</span>(smok<span class="op">$</span>age, smok<span class="op">$</span>bwt, <span class="dt">xlab =</span> <span class="st">&quot;Mother&#39;s age in years&quot;</span>,</span>
+<span id="cb75-3"><a href="#cb75-3"></a>     <span class="dt">ylab =</span> <span class="st">&quot;Birth weight in grams&quot;</span>,</span>
+<span id="cb75-4"><a href="#cb75-4"></a>     <span class="dt">main =</span> <span class="st">&quot;Association for smoking mothers&quot;</span>)</span></code></pre></div>
+<p><img src="task-descriptive-stats_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a>cpx &lt;-<span class="st"> </span><span class="kw">subset</span>(birthwt, ftv <span class="op">==</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>age <span class="op">&gt;</span><span class="st"> </span><span class="dv">30</span>)</span>
+<span id="cb76-2"><a href="#cb76-2"></a><span class="kw">boxplot</span>(cpx<span class="op">$</span>bwt <span class="op">~</span><span class="st"> </span>cpx<span class="op">$</span>smoke, <span class="dt">xlab =</span> <span class="st">&quot;Smoking status during pregnancy&quot;</span>,</span>
+<span id="cb76-3"><a href="#cb76-3"></a>        <span class="dt">main =</span> <span class="st">&quot;Mothers over 30 without first trimester visit&quot;</span>)</span></code></pre></div>
+<img src="task-descriptive-stats_files/figure-html/unnamed-chunk-33-1.png" width="672" />
+</div></li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Consider the <code>anscombe</code> datasets in base R. This data frame contains eight columns, <code>x1</code>-<code>x4</code> and <code>y1</code>-<code>y4</code>. Create four different datasets from it, the first containing columns <code>x1</code>,<code>y1</code>, the second <code>x2</code>,<code>y2</code>, etc. Then do the following:
+<ul>
+<li>Compute numerical summary statistics of these four datasets. Which pattern do you observe?</li>
+<li>Visualize the four datasets graphically. What can you conclude?</li>
+</ul>
+<!--Solution to exercise E-2-->
+<button onclick="showSolution(&quot;solutionExE2&quot;)">
+Show/hide solution
+</button>
+<div id="solutionExE2" style="display:none">
+<p>Answer: sample mean and sd for both variables, as well as their empirical correlation coefficient, agree for all 4 datasets. However, as can be seen from the graphics, the four datasets are completely different! These examples illustrate the usefulness of graphical analysis and the danger when solely presenting summary statistics.</p>
+</div></li>
+<li>Imagine two variables, one of them representing count data and the other one either categorical or continuous data. Determine an appropriate joint graphical representation of the two variables, assuming
+<ul>
+<li>the range of counts is very small (say, 3)</li>
+<li>the range of counts is very large (say, 100)</li>
+<li>the range of counts is somewhere in between (say, 10)<br />
+(In total, there are six scenarios to consider, e.g.  “other variable is categorical” and “small range of counts”)</li>
+</ul>
+<!--Solution to exercise E-3-->
+<button onclick="showSolution(&quot;solutionExE3&quot;)">
+Show/hide solution
+</button>
+<div id="solutionExE3" style="display:none">
+<p>Answer:</p>
+<ul>
+<li>small range of counts, other variable is categorical: joint frequency table using raw counts</li>
+<li>small range of counts, other variable is continuous: one boxplot / stripchart of other variable per count</li>
+<li>medium range of counts: first categorize to smaller number of categories, then proceed as described for small range of counts.</li>
+<li>large range of counts, other variable is categorical: one boxplot / stripchart of counts per category</li>
+<li>large range of counts, other variable is continuous: scatterplot</li>
+</ul>
+</div></li>
+</ol>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Plotting in R</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">PharMetrX A5 module 2020</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Overview</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    R tutorials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">R fundamentals</li>
+    <li>
+      <a href="basics.html">Basic syntax</a>
+    </li>
+    <li>
+      <a href="datatypes.html">Data types</a>
+    </li>
+    <li>
+      <a href="subsetting.html">Subsetting</a>
+    </li>
+    <li>
+      <a href="controlflow.html">Control flow</a>
+    </li>
+    <li>
+      <a href="packages.html">R Packages</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">R functions</li>
+    <li>
+      <a href="functioncall.html">Function calls</a>
+    </li>
+    <li>
+      <a href="writefunction.html">Defining a function</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Working with data</li>
+    <li>
+      <a href="dataimport.html">Data import/export</a>
+    </li>
+    <li>
+      <a href="dataframes.html">Manipulating data frames</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Further topics</li>
+    <li>
+      <a href="plotting.html">Plotting</a>
+    </li>
+    <li>
+      <a href="probability.html">Probability &amp; Sampling</a>
+    </li>
+    <li>
+      <a href="odes.html">Solving ODEs</a>
+    </li>
+    <li>
+      <a href="optimization.html">Optimization</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="task-descriptive-stats.html">Task 1: Descriptive statistics</a>
+</li>
+<li>
+  <a href="task-sampling-distr.html">Task 2: Sampling distribution</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Plotting in R</h1>
+
+</div>
+
+
+<p>R users have the choice between different plotting frameworks:</p>
+<ul>
+<li>base R plots</li>
+<li>package <code>ggplot2</code></li>
+<li>other packages like <code>lattice</code></li>
+</ul>
+<p>This tutorial covers the main syntax for creating R plots using either base R or package <code>ggplot2</code>.</p>
+<div id="plotting-in-base-r" class="section level2">
+<h2>Plotting in base R</h2>
+<p>Base R offers a large number of plotting functions (e.g. <code>plot</code>, <code>hist</code>, <code>barplot</code>, <code>boxplot</code>, …). The choice of an adequate plotting function for a particular graphical representation in descriptive statistics is covered in “Task 1: Descriptive statistics”. Here, the common syntax of plotting functions is described, using the <code>plot</code> function as an example.</p>
+<div id="arguments-to-plotting-functions" class="section level3">
+<h3>Arguments to plotting functions</h3>
+<p>Calling function <code>plot</code> with two arguments (x and y) already suffices to generate a first plot:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>y &lt;-<span class="st"> </span>x<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">plot</span>(x,y)</span></code></pre></div>
+<p><img src="plotting_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>The plotting functions have a number of optional arguments customizing the appearance of the plot. The most important ones are:</p>
+<ul>
+<li><code>type</code> (<code>"p"</code> for points, <code>"l"</code> for lines, …)</li>
+<li><code>main</code>: plot title</li>
+<li><code>xlab</code>/<code>ylab</code>: axis labels</li>
+<li><code>xlim</code>/<code>ylim</code>: axis limits (provided as a two-element vector, like <code>c(0,10)</code>)</li>
+<li><code>log</code>: which axes to represent on log-scale, <code>""</code> (none, default)/<code>"x"</code>/<code>"y"</code>/<code>"xy"</code></li>
+</ul>
+<p>Let’s give the above plot a better appearance:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">plot</span>(x, y, </span>
+<span id="cb2-2"><a href="#cb2-2"></a>     <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,</span>
+<span id="cb2-3"><a href="#cb2-3"></a>     <span class="dt">ylab =</span> <span class="st">&quot;f(x) = x^2&quot;</span>,</span>
+<span id="cb2-4"><a href="#cb2-4"></a>     <span class="dt">main =</span> <span class="st">&quot;Illustration of a quadratic function&quot;</span>)</span></code></pre></div>
+<p><img src="plotting_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>For a complete list of options to the <code>plot</code> function, see <code>?plot.default</code>.</p>
+</div>
+<div id="modifying-plots" class="section level3">
+<h3>Modifying plots</h3>
+<p>To add graphical elements to an existing plot, you can use functions <code>points</code> and <code>lines</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">plot</span>(x, y)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">lines</span>(x, y<span class="op">+</span><span class="dv">3</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">lines</span>(x, y<span class="dv">-3</span>)</span></code></pre></div>
+<p><img src="plotting_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>You always have to initialize a plot before using <code>points</code>/<code>lines</code>. The plot can also be initialized blank, but in this case you need to specify <code>xlim</code> and <code>ylim</code> values a priori (which is anyways a good idea if you want to draw several elements):</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">plot</span>(<span class="ot">NA</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">10</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">100</span>), <span class="dt">xlab =</span> <span class="st">&quot;x&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;f(x) = x^2&quot;</span>)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">lines</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">points</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)</span></code></pre></div>
+<p><img src="plotting_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="graphical-parameters" class="section level3">
+<h3>Graphical parameters</h3>
+<p>In addition to the arguments to plotting functions, there are also so-called <em>graphical parameters</em>, defined in function <code>par</code>. Some of these can be set inside the plotting functions themselves and are passed on to <code>par</code>, others can only be defined by calling <code>par</code>. The list of options is very long and the details are quite technical. Below ist a list of the most important options, which can also be provided via plotting functions themselves (so you won’t need to call <code>par</code> for these):</p>
+<ul>
+<li><code>lty</code>: line type; 1=solid (default), 2=dashed, 3=dotted, 4=dotdash, …</li>
+<li><code>pch</code>: plotting symbol (an integer between 0 and 25)</li>
+<li><code>col</code>: color, specified by one of the following:
+<ul>
+<li>a string like <code>"red"</code> or <code>"blue"</code> (<code>colors()</code> returns all 657 possible values)</li>
+<li>an integer specifying a color inside the current color palette.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="plotting-with-ggplot" class="section level2">
+<h2>Plotting with <code>ggplot</code></h2>
+<p>Package <code>ggplot2</code> is an implementation of the “Grammar of Graphics”, a theory for describing the syntax of graphics. It is one of the most widely of all R packages.</p>
+<div id="the-ggplot-syntax" class="section level3">
+<h3>The <code>ggplot</code> syntax</h3>
+<p>Here, a brief overview on the syntax of the <code>ggplot2</code> package will be given. There are a lot of useful online resources for further information; a good starting point is (<a href="https://ggplot2.tidyverse.org/" class="uri">https://ggplot2.tidyverse.org/</a>)[<a href="https://ggplot2.tidyverse.org/" class="uri">https://ggplot2.tidyverse.org/</a>].</p>
+<p>Before starting, install (if not yet done) and load the package:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">library</span>(<span class="st">&quot;ggplot2&quot;</span>)</span></code></pre></div>
+<p>A ggplot consists of at least three parts:</p>
+<ul>
+<li>a call to <code>ggplot</code> (without the “2” in the package name), defining the data to be plotted</li>
+<li>the definition of <em>asthetics</em> via function <code>aes</code> (which columns in the data frame to represent, and how)</li>
+<li>one or more “geoms” like <code>geom_point</code> (which geometrical object to draw)</li>
+</ul>
+<p>Let’s recreate the simple plot of the quadratic function:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>y &lt;-<span class="st"> </span>x<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)</span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<p><img src="plotting_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>In contrast to the base R plotting functions, which directly produce a plot, <code>ggplot</code> by itself produces an <em>object</em> which is rendered as a plot when the object is <em>printed</em>. This means that the ggplot objects themselves can be modified, created in several steps, etc. before the actual plotting. For example, the above plot can be created stepwise and then printed by typing the variable name:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>ggobj &lt;-<span class="st"> </span><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y))</span>
+<span id="cb8-2"><a href="#cb8-2"></a>ggobj &lt;-<span class="st"> </span>ggobj <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</span>
+<span id="cb8-3"><a href="#cb8-3"></a>ggobj</span></code></pre></div>
+<p><img src="plotting_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="advantages-of-ggplot-over-base-r" class="section level3">
+<h3>Advantages of <code>ggplot</code> over base R</h3>
+<p>The main advantage of <code>ggplot2</code> over base R plots is the built-in support for common high-level graphical operations, like the following:</p>
+<ol style="list-style-type: decimal">
+<li>color the plot per level of a factor</li>
+<li>draw one line per level of a factor (grouping)</li>
+<li>create a subplot per level of a factor (called “facetting”)</li>
+</ol>
+<p>This allows to considerably shorten and simplify the commands needed to create such plots. Since pharmacometric plots are often quite complex, this feature makes <code>ggplot2</code> well suited for this application.</p>
+<p>As an example, let us consider again the <code>birthwt</code> dataset (from Tutorials “Data import/export” and “Manipulating data frames”) and make a complex plot:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>birthwt &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;birthwt.csv&quot;</span>) </span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">ggplot</span>(birthwt, <span class="kw">aes</span>(<span class="dt">x =</span> age, <span class="dt">y =</span> bwt, <span class="dt">color =</span> smoke, <span class="dt">shape =</span> ht))  <span class="op">+</span><span class="st"> </span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="st">&quot;race&quot;</span>)</span></code></pre></div>
+<p><img src="plotting_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>In base R, creating such a plot would require at least 20 lines of complex code involving loops, low-level graphical parameters, data subsetting, etc.</p>
+</div>
+<div id="disadvantages-of-ggplot-over-base-r" class="section level3">
+<h3>Disadvantages of <code>ggplot</code> over base R</h3>
+<p>For very simple plots, base R functions provide a more intuitive interface. For example, compare the following commands:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>)     <span class="co"># 1000 normally distributed random numbers</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">hist</span>(x)</span></code></pre></div>
+<p><img src="plotting_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">ggplot</span>(<span class="kw">data.frame</span>(x), <span class="kw">aes</span>(<span class="dt">x =</span> x)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="plotting_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
+<p>At the other end of the complexity scale, base R graphics offer a slightly larger variety of plots than the <code>ggplot2</code> package (although the coverage is quite extensive). This very uncommon case will not be discussed in this tutorial.</p>
+</div>
+</div>
+<div id="graphical-devices" class="section level2">
+<h2>Graphical devices</h2>
+<p>If you’re using RStudio, the generated plots will appear in the “Plots” panel. This is one type of graphical output device, a so-called <em>screen device</em>.</p>
+<p>The default graphical output device can be seen as follows (if you’re using RStudio, it should be the RStudio graphical device):</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">options</span>(<span class="st">&#39;device&#39;</span>)</span></code></pre></div>
+<p>One way of creating a file (<code>.pdf</code>. or an image format like <code>.png</code>) from a plot is to use the interactive export in the RStudio “Plots” panel.</p>
+<p>Alternatively, you can use a <em>file device</em> instead of the screen device, like <code>pdf</code>, <code>postscript</code> or <code>png</code>.</p>
+<p>The syntax for exporting to a file is as follows:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">pdf</span>(<span class="st">&quot;My histogram.pdf&quot;</span>)       <span class="co"># open the pdf file device</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="kw">hist</span>(x)</span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="kw">dev.off</span>()   <span class="co"># shut down the device again</span></span></code></pre></div>
+<p>File devices have further options, like width, height or font style, which you can look up in the function help.</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

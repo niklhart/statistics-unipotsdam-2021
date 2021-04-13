@@ -1,0 +1,202 @@
+---
+title: "Basic syntax of the R language"
+---
+
+## Commands 
+
+R is an interpreted language, and commands inside a script are parsed line by 
+line. Long commands can be split into several lines, but you have to make sure that 
+during any line break, the command is still "incomplete".
+
+For example, the following command works perfectly fine: 
+since line 1 is incomplete, line 2 is considered part of the command in line 1.
+
+```{r}
+2 * 
+2
+```
+
+In contrast, if `*` is put into the second line, the first line is considered 
+complete, and the second command is syntactically wrong, resulting in an error:
+
+```{r, eval = FALSE}
+2
+* 2
+```
+
+```{r, echo = FALSE}
+cat("Error: unexpected '*' in '*'")
+```
+
+Multi-line commands are often used make complex function calls more easy to read. 
+For example, the following command creates a variable of type "data frame" 
+(see Tutorial "Data types") with three columns:
+
+```{r}
+data.frame(
+    x = 1:3,
+    y = 4:6,
+    z = 7:9
+)
+```
+
+## Operators
+
+### Assignment operator
+
+To assign a value to a variable, use the `<-` operator:
+
+```{r}
+x <- 3
+y <- 1 + 1
+```
+
+(In fact, there are two assignment operators, `<-` and `=`, but it is recommended 
+to always use `<-`, which will be done consistently in this module.)
+
+It is important to write `<-` as a single symbol without blank space (not `< -`), 
+otherwise it is interpreted as "smaller than minus".
+
+Assigned values will not be displayed at the console. To display
+the value of a variable, type the variable name as a separate command 
+(an alternative is to use parentheses `()`, see below)
+
+```{r}
+x <- 3
+x
+```
+
+If you are using RStudio, you can also look at defined variables in the 
+"Environment" tab.
+
+### Colon operator
+
+The colon operator `:` creates regular numeric sequences:
+
+```{r}
+1:10
+1.5:4
+5:1
+```
+
+### Math operators
+
+The main math operators are 
+
+* `+` (plus)
+* `-` (minus)
+* `*` (times)
+* `/` (divide)
+* `^` (power)
+
+All of these operators are vectorized, which means any of the arguments can be
+vectors:
+
+```{r}
+1:3 + 3:1
+```
+
+
+If the two inputs are vectors of different sizes, the shorter one will 
+be automatically *recycled* (i.e., expanded to a vector of the matching size):
+
+```{r}
+1:3 + 2
+```
+
+### Comparison operators
+
+Comparison of numeric variables results in logical variables (`TRUE`/`FALSE`).
+It can be done with operators 
+
+* `==` (equal to; not to be confused with `=`)
+* `!=` (different from)
+* `>` (greater than)
+* `<` (less than)
+* `>=` (greater or equal)
+* `<=` (less or equal)
+
+Again, all comparison operators are vectorized. See the following exampes:
+
+```{r}
+1:3 > 3:1
+1:3 != 2
+```
+
+### Logical operators
+
+The following logical operators are defined:
+
+* `!` (negation, vectorized)
+* `&&` (logical AND)
+* `||` (logical OR)
+* `&` (logical AND, vectorized)
+* `|` (logical OR, vectorized)
+
+See the following examples.
+
+```{r}
+!TRUE
+TRUE && FALSE
+TRUE || FALSE
+FALSE || FALSE
+```
+
+### Parenthesis and brace operators
+
+The parenthesis operator `(` is used for two purposes:
+
+(1) change operator precedence by grouping
+
+    ```{r}
+    1:5+2
+    1:(5+2)
+    ```
+    
+    In complex expressions, it is recommended to always make precedence clear via `()`.
+
+(2) make the result of an assignment visible
+
+    ```{r}
+    x <- 5+5   # value of x not visible
+    (x <- 5+5) # value of x visible 
+    ```
+
+The brace operator `{` can be used to group several commands. This is useful in
+many contexts, for example in function definitions (see tutorial "Defining a function")
+and if/else statements or loops (see tutorial "Control flow"). Only the last 
+command inside `{}` is returned:
+
+```{r}
+{
+    x <- 1+1 #
+    x        # not returned
+    x+3      # returned
+}
+```
+
+## Help
+
+To get help about a particular function, use `?` or `help()` (the two produce 
+identical results):
+
+```{r}
+?sum
+help(sum)
+```
+
+The help contains information about the function's syntax (i.e., expected arguments
+and output format), comments about the purpose and implementation of the function, 
+and finally, some examples for how to use the function. 
+
+For beginners, the R help is quite difficult to understand, don't worry if you
+feel overwhelmed!
+
+To assess the function help for operators like `+` or `:`, the operator name has 
+to be enclosed into backticks:
+
+```{r, eval = FALSE}
+?`:`
+help(`:`)
+```
+

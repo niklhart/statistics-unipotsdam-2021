@@ -1,0 +1,21 @@
+---
+title: "Playground: some features"
+output:
+  html_document:
+    toc: false
+---
+
+
+## Tabset {.tabset .tabset-fade .tabset-pills} 
+
+### Tab 1
+
+text 1
+
+### Tab 2
+
+text 2
+
+## {-}
+
+text after tabset

@@ -1,0 +1,41 @@
+---
+title: "Online R material, Statistics module 2021"
+output:
+  html_document:
+    toc: false
+---
+
+This website is part of the online training material for the 2021 Statistics 
+module at University of Potsdam. The material has been created by Niklas Hartung, 
+University of Potsdam (2021), and is distributed under the terms 
+of the Creative Commons License (CC BY-NC-SA 4.0): 
+Attribution-NonCommercial-ShareAlike 4.0 Unported.
+
+It contains different **Tutorials** covering the R programming skills required 
+during the course. Depending on your current experience with R, you might be able to 
+skip parts of this material. Below, an overview on the tutorial content is given.
+The tutorials themselves can be accessed by clicking on "R Tutorials" in the header.
+
+Furthermore, a section about descriptive statistics explains how the different 
+numerical and graphical summaries shown in the lecture are implemented in R.
+
+The following topics are covered in the R tutorials:
+
+Tutorial            | Topic
+--------------------|:-----------------------------------------------
+Getting started     | RStudio, R scripts, cheatsheets.
+Basic syntax        | Commands, operators (`<-`/`:`/numeric/comparison/logical/`()`/`{}`), R help
+Data types          | Vectors, factors, matrices, data frames, lists and functions
+Subsetting          | Subsetting operators `[` / `[[` / `$`, numeric/logical/character subsetting, subassignments
+Control flow        | `if`/`else` statements, `for`/`while` loops
+R packages          | Package installation and use of package functions
+Function calls      | Formal vs. input arguments, default arguments, `...` argument, non-standard evaluation
+Defining a function | Syntax of function arguments and function body, environmental variables
+Data import/export  | Read from and write to `.csv`, formatting options
+Manipulating data frames | Summary, adding/removing columns, subsetting via `subset`, combining data frames
+Plotting            | Create different plots in base R or with package `ggplot2`
+Probability&Sampling| Functions `d*`/`p*`/`q*`/`r*` (e.g. `dnorm`), `sample` (with or without replacement), `set.seed()`
+Optimization        | Syntax of function `optim`, defining an objective function
+
+
+

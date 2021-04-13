@@ -1,0 +1,87 @@
+---
+title: "R packages"
+---
+
+The core R installation contains fundamental tools for statistical data analysis. 
+More advanced techniques, as well as other capabilities beyond classical statistical 
+modelling, are contained in **R packages**. 
+
+## Pre-installed packages
+
+In fact, the base R installation is already organized in packages, namely
+`base`, `methods`, `datasets`, `utils`, `grDevices`, `graphics`, and `stats`.
+
+We can see this by looking at the search path:
+
+```{r, echo = FALSE}
+library("deSolve")
+detach("package:deSolve")
+```
+
+```{r}
+search()
+```
+
+In addition to the above mentioned packages, there are a few additional elements 
+on the search path which are not important for us now.
+
+## Install and load a package
+
+Many R packages are hosted on CRAN (comprehensive R archive network). To install
+a CRAN package use function `install.packages()`:
+
+```{r, eval = FALSE}
+install.packages("ggplot2")
+```
+
+Once a package is installed, there are two ways of using functions from this 
+package: 
+
+(1) via the scoping operator `::`, using the syntax `package::function()`, e.g.
+
+```{r, eval = FALSE}
+ggplot2::ggplot()
+```
+
+This is an unambiguous way of calling a function from a certain package, but the
+command is a bit long. Therefore, an alternative is
+
+(2) by loading the package (this is what you will usually do)
+
+```{r}
+library("ggplot2")
+```
+
+This call makes all functions from the package available without any need to use
+the scoping operator, i.e. we can now use
+
+```{r, eval = FALSE}
+ggplot()
+```
+
+We can also see that the `ggplot2` packages was added to the search path:
+
+```{r}
+search()
+```
+
+However, conflicts can occur if two loaded packages define a function
+with the same name. In this case, a warning is displayed and only the function 
+defined in the package loaded most recently can be called without the scoping 
+operator.
+
+## Important packages
+
+Below follows a list of useful packages for this module, along with their 
+capabilities.
+
+Package   | Functionality
+----------|--------------
+`deSolve` | ODE solving capacities (required)
+`ggplot2` | Flexible graphical system
+`MASS`    | Example datasets
+`reshape2`| Manipulation of data frames 
+
+
+
+

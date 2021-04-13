@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Data types</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">PharMetrX A5 module 2020</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Overview</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    R tutorials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">R fundamentals</li>
+    <li>
+      <a href="basics.html">Basic syntax</a>
+    </li>
+    <li>
+      <a href="datatypes.html">Data types</a>
+    </li>
+    <li>
+      <a href="subsetting.html">Subsetting</a>
+    </li>
+    <li>
+      <a href="controlflow.html">Control flow</a>
+    </li>
+    <li>
+      <a href="packages.html">R Packages</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">R functions</li>
+    <li>
+      <a href="functioncall.html">Function calls</a>
+    </li>
+    <li>
+      <a href="writefunction.html">Defining a function</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Working with data</li>
+    <li>
+      <a href="dataimport.html">Data import/export</a>
+    </li>
+    <li>
+      <a href="dataframes.html">Manipulating data frames</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Further topics</li>
+    <li>
+      <a href="plotting.html">Plotting</a>
+    </li>
+    <li>
+      <a href="probability.html">Probability &amp; Sampling</a>
+    </li>
+    <li>
+      <a href="odes.html">Solving ODEs</a>
+    </li>
+    <li>
+      <a href="optimization.html">Optimization</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="task-descriptive-stats.html">Task 1: Descriptive statistics</a>
+</li>
+<li>
+  <a href="task-sampling-distr.html">Task 2: Sampling distribution</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Data types</h1>
+
+</div>
+
+
+<p>This tutorial covers the fundamental data types in R:</p>
+<ul>
+<li>Vectors</li>
+<li>Factors</li>
+<li>Matrices</li>
+<li>Data frames</li>
+<li>Lists</li>
+<li>Functions</li>
+</ul>
+<div id="vectors" class="section level2">
+<h2>Vectors</h2>
+<p>A vector contains one or several values of a particular type. The most important types are:</p>
+<ul>
+<li><strong>numeric</strong> (e.g., <code>1.41434</code>)</li>
+<li><strong>integer</strong> (e.g., <code>5</code> or <code>-2</code>)</li>
+<li><strong>logical</strong> (<code>TRUE</code> or <code>FALSE</code>)</li>
+<li><strong>character</strong> (e.g., <code>"tutorial"</code>, <code>"peanut"</code>, …)</li>
+</ul>
+<p>In addition, each type has a special value <code>NA</code>, indicating missing values.</p>
+<p>Vectors of a certain length can be allocated (initialized) as follows:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">numeric</span>(<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1] 0 0 0 0</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">integer</span>(<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1] 0 0 0 0</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">logical</span>(<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] FALSE FALSE FALSE</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">character</span>(<span class="dv">6</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot;</code></pre>
+<p>Vectors can be interconverted between the different formats:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">as.character</span>(<span class="kw">c</span>(<span class="fl">2.34</span>,<span class="fl">1.42</span>,<span class="dv">0</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;2.34&quot; &quot;1.42&quot; &quot;0&quot;</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">as.logical</span>(<span class="kw">c</span>(<span class="fl">2.34</span>,<span class="fl">1.42</span>,<span class="dv">0</span>))</span></code></pre></div>
+<pre><code>## [1]  TRUE  TRUE FALSE</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">as.numeric</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>,<span class="ot">FALSE</span>))</span></code></pre></div>
+<pre><code>## [1] 1 0</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">as.character</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>,<span class="ot">FALSE</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;TRUE&quot;  &quot;FALSE&quot;</code></pre>
+<p>In most cases, the distinction between <em>numeric</em> and <em>integer</em> types is not very important, since they are almost always automatically converted to the required format.</p>
+<p>Values/vectors can be combined using the command <code>c</code>:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">numeric</span>(<span class="dv">2</span>), <span class="fl">2.3</span>)</span></code></pre></div>
+<pre><code>## [1] 1.0 0.0 0.0 2.3</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot;</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)</span></code></pre></div>
+<pre><code>## [1]  TRUE  TRUE FALSE</code></pre>
+<p>Regular sequences of numeric vectors can be created in different ways, too:</p>
+<ol style="list-style-type: decimal">
+<li>the <code>:</code> command:</li>
+</ol>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="dv">1</span><span class="op">:</span><span class="dv">4</span></span></code></pre></div>
+<pre><code>## [1] 1 2 3 4</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fl">2.5</span><span class="op">:</span><span class="fl">4.5</span></span></code></pre></div>
+<pre><code>## [1] 2.5 3.5 4.5</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>function <code>seq()</code>:</li>
+</ol>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">1</span>, <span class="dt">to =</span> <span class="dv">7</span>, <span class="dt">by =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 1 3 5 7</code></pre>
+<p>Vectors can also be <em>named</em>. Then, each element of the vector has its own name:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)     <span class="co"># unnamed values</span></span></code></pre></div>
+<pre><code>## [1] 1 2</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="kw">c</span>(<span class="dt">a=</span><span class="dv">1</span>,<span class="dt">b=</span><span class="dv">2</span>) <span class="co"># values named &quot;a&quot; and &quot;b&quot;</span></span></code></pre></div>
+<pre><code>## a b 
+## 1 2</code></pre>
+</div>
+<div id="factors" class="section level2">
+<h2>Factors</h2>
+<p>The data type “factor” is designed for categorical variables, i.e. variables with a pre-defined set of values (usually, the number of categories is much smaller than the length of the vector).</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>x &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;small&quot;</span>,<span class="st">&quot;medium&quot;</span>,<span class="st">&quot;small&quot;</span>,<span class="st">&quot;big&quot;</span>))</span>
+<span id="cb33-2"><a href="#cb33-2"></a>x</span></code></pre></div>
+<pre><code>## [1] small  medium small  big   
+## Levels: big medium small</code></pre>
+<p>The possible values are called “levels”.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="kw">levels</span>(x)</span></code></pre></div>
+<pre><code>## [1] &quot;big&quot;    &quot;medium&quot; &quot;small&quot;</code></pre>
+<p>It is also possible for a factor to have a level which is not used in the vector itself (for example, this allows to document that a certain category was not observed). In this case, define the levels as an input argument to <code>factor</code>:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>y &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;small&quot;</span>,<span class="st">&quot;medium&quot;</span>,<span class="st">&quot;small&quot;</span>), <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;small&quot;</span>,<span class="st">&quot;medium&quot;</span>,<span class="st">&quot;big&quot;</span>))</span>
+<span id="cb37-2"><a href="#cb37-2"></a>y</span></code></pre></div>
+<pre><code>## [1] small  medium small 
+## Levels: small medium big</code></pre>
+<p>Factors can be <em>unordered</em> (the default) or <em>ordered</em> – corresponding to nominal and ordinal data types. For example, variable <code>y</code> above could be encoded as ordered. In this case, always use argument <code>levels</code>, and in increasing order:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>y &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;small&quot;</span>,<span class="st">&quot;medium&quot;</span>,<span class="st">&quot;small&quot;</span>), <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;small&quot;</span>,<span class="st">&quot;medium&quot;</span>,<span class="st">&quot;big&quot;</span>), <span class="dt">ordered =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb39-2"><a href="#cb39-2"></a>y</span></code></pre></div>
+<pre><code>## [1] small  medium small 
+## Levels: small &lt; medium &lt; big</code></pre>
+<p>Ordered factors can be compared using comparison operators (see Tutorial “Basic syntax”), quantiles can be determined, and many plotting functions respect the ordering during display.</p>
+<p>For efficiency, factors are implemented on top of integer vectors with the levels as display values. This has important consequences for manipulation of factors because many functions trigger a conversion of a factor to its underlying type “integer”, which is generally not what you want. For example, concatenation first converts <code>y</code> to integer, then to character, to produce a vector consistent with the second argument:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="kw">c</span>(y, <span class="st">&quot;small&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;1&quot;     &quot;2&quot;     &quot;1&quot;     &quot;small&quot;</code></pre>
+</div>
+<div id="matrices" class="section level2">
+<h2>Matrices</h2>
+<p>Matrices can be created using function <code>matrix()</code>. Arguments <code>nrow</code>/<code>ncol</code> specify the size of the matrix, and one of them can be left blank.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="dt">nrow =</span> <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    4
+## [2,]    2    5
+## [3,]    3    6</code></pre>
+<p>For matrices, the operator <code>*</code> denotes <em>element-wise multiplication</em>. For <em>matrix multiplication</em> (which is what you often want), use <code>%*%</code> instead of <code>*</code>:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a>M &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">nrow =</span> <span class="dv">2</span>)</span>
+<span id="cb45-2"><a href="#cb45-2"></a>M</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    3
+## [2,]    2    4</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a>x &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">nrow =</span> <span class="dv">2</span>)</span>
+<span id="cb47-2"><a href="#cb47-2"></a>x</span></code></pre></div>
+<pre><code>##      [,1]
+## [1,]    1
+## [2,]    2</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>M <span class="op">%*%</span><span class="st"> </span>x</span></code></pre></div>
+<pre><code>##      [,1]
+## [1,]    7
+## [2,]   10</code></pre>
+<p>Invertible (square) matrices can be inverted using function <code>solve</code>:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="kw">solve</span>(M)</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]   -2  1.5
+## [2,]    1 -0.5</code></pre>
+<p>Several vectors/matrices can also be combined by row or column using functions <code>rbind</code> and <code>cbind</code>:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="kw">rbind</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>)  <span class="co"># arguments interpreted as row vectors</span></span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    2    3
+## [2,]    4    5    6</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="kw">cbind</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">4</span><span class="op">:</span><span class="dv">6</span>)  <span class="co"># arguments interpreted as column vectors</span></span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    4
+## [2,]    2    5
+## [3,]    3    6</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="kw">cbind</span>(M,M)      <span class="co"># returns matrix (M M)</span></span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    3    1    3
+## [2,]    2    4    2    4</code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a>                <span class="co"># returns matrix (M)</span></span>
+<span id="cb59-2"><a href="#cb59-2"></a><span class="kw">rbind</span>(M,M)      <span class="co">#                (M)</span></span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    3
+## [2,]    2    4
+## [3,]    1    3
+## [4,]    2    4</code></pre>
+</div>
+<div id="data-frames" class="section level2">
+<h2>Data frames</h2>
+<p>Data frames are designed to hold data. It is a tabular format, similar to a matrix, but where different columns can have different types (e.g. numeric or character). In many cases, each row corresponds to a different observation/record, whereas each column corresponds to one observable quantity.</p>
+<p>Data frames can be defined as follows:</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a>t  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb61-2"><a href="#cb61-2"></a>id  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>)</span>
+<span id="cb61-3"><a href="#cb61-3"></a>df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">time =</span> t, <span class="dt">ids =</span> id)</span>
+<span id="cb61-4"><a href="#cb61-4"></a>df</span></code></pre></div>
+<pre><code>##   time ids
+## 1    1   a
+## 2    2   b
+## 3    3   c</code></pre>
+<p>For unnamed arguments, <code>data.frame()</code> uses the argument names as column names:</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a>R  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb63-2"><a href="#cb63-2"></a>df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(R)</span>
+<span id="cb63-3"><a href="#cb63-3"></a>df</span></code></pre></div>
+<pre><code>##   R
+## 1 1
+## 2 2
+## 3 3</code></pre>
+<p>Most of the time, data frames will be read from a tabular data file (e.g., a .csv file) – see Tutorial “Data import/export”. Often, data frames need further post-processing like subsetting. This is covered in Tutorial “Manipulating data frames”.</p>
+</div>
+<div id="lists" class="section level2">
+<h2>Lists</h2>
+<p>A list is like a vector, but it allows to hold heterogeneous data. Like vectors, lists can be unnamed or named, which depends on whether argument names are provided to the <code>list</code> function (most often, named lists are used):</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a><span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,</span>
+<span id="cb65-2"><a href="#cb65-2"></a>     <span class="st">&quot;A&quot;</span>,</span>
+<span id="cb65-3"><a href="#cb65-3"></a>     <span class="kw">data.frame</span>(<span class="dt">r=</span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</span>
+<span id="cb65-4"><a href="#cb65-4"></a>)</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] 1 2 3
+## 
+## [[2]]
+## [1] &quot;A&quot;
+## 
+## [[3]]
+##   r
+## 1 1
+## 2 2
+## 3 3</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a><span class="kw">list</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,</span>
+<span id="cb67-2"><a href="#cb67-2"></a>     <span class="dt">y =</span> <span class="st">&quot;A&quot;</span>,</span>
+<span id="cb67-3"><a href="#cb67-3"></a>     <span class="dt">z =</span> <span class="kw">data.frame</span>(<span class="dt">r=</span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</span>
+<span id="cb67-4"><a href="#cb67-4"></a>)</span></code></pre></div>
+<pre><code>## $x
+## [1] 1 2 3
+## 
+## $y
+## [1] &quot;A&quot;
+## 
+## $z
+##   r
+## 1 1
+## 2 2
+## 3 3</code></pre>
+<p>Lists can also be nested:</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a><span class="kw">list</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,</span>
+<span id="cb69-2"><a href="#cb69-2"></a>     <span class="dt">y =</span> <span class="kw">list</span>(<span class="dt">z =</span> <span class="dv">1</span>)</span>
+<span id="cb69-3"><a href="#cb69-3"></a>)</span></code></pre></div>
+<pre><code>## $x
+## [1] 1 2 3
+## 
+## $y
+## $y$z
+## [1] 1</code></pre>
+</div>
+<div id="functions" class="section level2">
+<h2>Functions</h2>
+<p>Here a very short introduction to functions is given. Further details about functions are provided in the tutorials “Function calls” and “Defining a function”.</p>
+<p>Each function consist of three parts:</p>
+<ul>
+<li>the formal arguments (including argument names and optionally default values)</li>
+<li>the function body (the actual function content)</li>
+<li>an environment in which it was defined (see Tutorial “Defining a function”)</li>
+</ul>
+<p>All R functions return exactly one value. More complex output must be provided in a suitable data format. Often, this is a list.</p>
+<p>R features <em>first-class functions</em>. This means that functions are a data type as any other one:</p>
+<ul>
+<li>functions can be passed as arguments to other functions</li>
+<li>functions can be stored in lists</li>
+<li>functions can be modified (advanced)</li>
+</ul>
+<p>Typing a function name at the console reveals the content of a function. For almost all base R functions, the output is extremely difficult to read. Here’s an easy example, function <code>force</code>, which just evaluates its input.</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a>force</span></code></pre></div>
+<pre><code>## function (x) 
+## x
+## &lt;bytecode: 0x7fd489924bf8&gt;
+## &lt;environment: namespace:base&gt;</code></pre>
+<p>Here, <code>x</code> is the single formal argument, <code>x</code> is also the function body, and the function environment is the (namespace of the) “base” package.</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

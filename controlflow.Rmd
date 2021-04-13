@@ -1,0 +1,168 @@
+---
+title: "Control flow in R"
+---
+
+This tutorial covers control flow operators:
+
+* `if`/`else` statements
+* `for`/`while` loops
+
+## If/else statements
+
+An if/else statement executes code under a certain condition, specified via a boolean
+(a variable which is either `TRUE` or `FALSE`). The basic syntax is the following:
+
+```{r, eval = FALSE}
+if (boolean) {
+    # code to be executed if boolean is TRUE
+}
+```
+
+or, if some other code shall be executed if `boolean` is `FALSE`, 
+
+```{r, eval = FALSE}
+if (boolean) {
+    # code to be executed if boolean is TRUE
+} else {
+    # code to be executed if boolean is FALSE
+}
+```
+
+Let's give an example:
+
+```{r}
+x <- rnorm(1)         # normally distributed pseudorandom number
+x
+if (x > 0) {
+    print("x is positive")
+} else {    
+    print("x is negative")
+}
+```
+
+The result of an if statement can also be assigned into a variable. For example,
+the above code can be rewritten as follows:
+
+```{r}
+text <- if (x > 0) {
+    "x is positive"
+} else {    
+    "x is negative"
+}
+print(text)
+```
+
+If an if statement is used that way without any else-statement and the condition
+is not met, the resulting value will be `NULL`.
+
+If/else statements can also be chained, covering more than two possible outcomes:
+```{r}
+if (x > 1) {
+    print("x is greater than 1")
+} else if (x >= -1) {
+    print("x is in [-1,1]")
+} else {
+    print("x is less than -1")
+}
+```
+
+A `switch` provides another way of control flow between any number of cases
+(not covered in this tutorial).
+
+## Loops
+
+Loops allow to repeat an instruction many times. There are three types of loops
+in R:
+
+* `for`-loops repeat an instruction a predefined number of iterations, each time changing 
+a single input parameter.
+* `while`-loops repeat an instruction as long as a logical condition is satisfied. 
+* `repeat`-loops can always be replaced by `while`-loops and should be avoided altogether.
+
+### For-loops
+
+In most cases, a `for`-loops is the appropriate type of loop. The basic syntax 
+of a `for`-loop is as follows:
+
+```{r, eval = FALSE}
+for (variable in vector) {
+    # code to be run
+}
+```
+
+Most often, the loop is written as
+
+```{r, eval = FALSE}
+for (i in 1:n) {
+    # code to be run (using variable 'i')
+}
+```
+
+where the number of iterations `n` is defined before in the script and where `i` 
+is called the running index. 
+
+The following example computes the first ten square numbers (note the allocation
+of vector `x` before the loop):
+
+```{r}
+n <- 10
+x <- numeric(n)
+for (i in 1:n) {
+    x[i] <- i^2
+}
+x
+```
+
+In fact, in this case it is not necessary to use a `for`-loop because the power 
+function is vectorized:
+```{r}
+(1:n)^2
+```
+
+However, not all `for`-loops can be replaced in this way, in particular when the
+computations inside the loop are more complex, because of:
+
+(1) a non-vectorized computation inside the loop, or
+(2) a computation inside the loop depending on something computed 
+    in a previous iteration
+
+An alternative for many `for`-loops is the use of the `apply` family of functions
+(not covered in this tutorial).
+
+### While-loops
+
+`while`-loops are more general than `for`-loops; in particular, they can be used if 
+the number of iterations is not known a priori (for example, it might depend on 
+random numbers generated within the loop). 
+
+The basic syntax of a `while`-loop is as follows:
+
+```{r, eval = FALSE}
+condition <- TRUE
+while (condition) {
+    
+    # code to be run
+    
+    condition <- # ... result (TRUE/FALSE) of a logical operator, e.g. ">"
+}
+```
+
+See the following example of a `while`-loop, counting the number of "failures" 
+until the first "success" of a binary outcome with success probability of 10%
+(remember that `!` is the negation operator):
+
+```{r}
+nfail <- 0
+success <- FALSE
+while (!success) {
+    x <- rbinom(1, size = 1, prob = 0.1)   # see Tutorial "Probability & Sampling"
+    success <- x == 1
+    if (!success) {
+        nfail <- nfail + 1
+    }
+}
+nfail
+```
+
+
+

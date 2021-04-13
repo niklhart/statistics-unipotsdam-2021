@@ -1,0 +1,74 @@
+---
+title: "Data import/export"
+---
+
+R offers many functions to import/export data in various formats. In this short 
+tutorial, we will restrict ourselves to the `.csv` format (comma separated values), 
+and cover
+
+* import of tabular data from a `.csv` file into a data frame
+* export of a data frame into a `.csv` file
+
+## Data import
+
+### Specifying a file path
+
+To import data from a `.csv` file, use function `read.csv()`:
+
+```{r}
+df <- read.csv("birthwt.csv")   # see tutorial "Manipulating data frames"
+summary(df)                     # for more information about this dataset 
+```
+
+The file can be specified using either an *absolute path* or a *relative path* 
+with respect to your current working directory. Above, a relative path was used,
+we can see that the dataset was indeed in this folder:
+
+```{r}
+getwd()
+list.files(getwd(), pattern = "*.csv")
+```
+
+You can also use the absolute path, or set the working directory via function 
+`setwd()`. Note that on Windows, you have to replace `\` in path names by `/`.
+
+For convenience, there is also a function called `read.csv2()`, which uses 
+different defaults for separators (`,` as decimal point and `;` as delimiter).
+
+### Formatting options
+
+Beyond the file to import, `read.csv` offers a large number of options to 
+customize the import. The most important are listed below:
+
+- `header`: if `TRUE`, uses the first row of the `.csv` file as column names. In
+  most cases, this is what you want, otherwise set to `FALSE` and provide column 
+  names via argument `col.names`.
+- `stringsAsFactors`: if `TRUE`, all character columns are treated as factors, 
+  rather than character vectors. Again, this is often appropriate, but some 
+  characters like ID labels are not appropriately treated as factors. Hence, 
+  some post processing might be required.
+
+## Data export
+
+Function `write.csv()` writes a data frame to a `.csv` file, and again, 
+absolute or relative paths can be used:
+
+```{r, eval = FALSE}
+write.csv(df, file = "birthwt2.csv")
+```
+
+This function offers much less options than `read.csv()`, the most important being
+
+- `row.names`: if `TRUE` (the default), then row names are written as a first
+  dataset column. I always use `row.names = FALSE`.
+
+Importantly, in contrast to `read.csv()` it is **not possible to customize** the 
+following arguments:
+
+- `col.names`: column names are always taken from the data frame itself
+- `dec`: the decimal point is always `.`
+- `sep`: the delimiter is always `,` 
+
+To use (`,`/`;`) for `dec`/`sep` instead of (`.`/`,`), you must use `write.csv2()`.
+
+

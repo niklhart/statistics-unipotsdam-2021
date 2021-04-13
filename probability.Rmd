@@ -1,0 +1,120 @@
+---
+title: "Probability & Sampling"
+---
+
+This tutorial covers the mains R functions describing probability distributions 
+and the generation of random samples.
+
+## The `d/p/q/r` functions
+
+In **R**, there is a specific set of four functions for many common probability 
+distributions, the *d-p-q-r functions* (for Density -- Probability -- 
+Quantile -- Realization):
+
+* `d***`: probability density / probability mass function
+* `p***`: (cumulative) distribution function
+* `q***`: quantile function (inverse of distribution function)
+* `r***`: realization (a sample from the specified distribution)
+
+These functions always have the following syntax:
+
+* the first argument is the same for all probability distributions, however its
+  name differs for the four types: `x` for `d***`,  `q` (quantile) for `p***`,
+  `p` (probability) for `q***`, and  `n` (sample size) for `r***`
+* the remaining arguments are the same for the `d/p/q/r` functions, but differ 
+  for each each probability distribution; they are the specific parameters 
+  describing the distribution. For some but not all distributions, defaults are 
+  defined for the distribution parameters.
+
+We will consider some examples:
+
+**Binomial distribution**: $\mathcal{B}(n,p)$ with $n=10$, $p=0.1$
+
+```{r}
+dbinom(x = 1, size = 10, prob = 0.1)   # Probability mass function at x=1
+pbinom(q = 1, size = 10, prob = 0.1)   # Distribution function at q=1
+qbinom(p = 0.5, size = 10, prob = 0.1) # Quantile function at p=0.5
+rbinom(n = 20, size = 10, prob = 0.1)  # Simulate a sample of size 20
+```
+
+**Poisson distribution**: $\text{Poiss}(\lambda)$ with $\lambda=2$
+
+```{r, eval = FALSE}
+dpois(x = 1, lambda = 2)     # Probability mass function at x=1
+ppois(q = 1, lambda = 2)     # Distribution function at q=1
+qpois(p = 0.5, lambda = 2)   # Quantile function at p=0.5
+rpois(n = 20, lambda = 2)    # Simulate a sample of size 20
+```
+
+**Normal distribution**: $\mathcal{N}(\mu,\sigma^2)$ with $\mu=1$, $\sigma=3$
+
+```{r, eval = FALSE}
+dnorm(x = 2, mean = 1, sd = 3)    # Probability density function at x=2
+pnorm(q = 2, mean = 1, sd = 3)    # Distribution function at q=2
+qnorm(p = 0.5, mean = 1, sd = 3)  # Quantile function at p=0.5
+rnorm(n = 20, mean = 1, sd = 3)   # Simulate a sample of size 20
+```
+
+## Function `sample`
+
+Function `sample` allows to draw a sample from a finite set of values, with or
+without replacement:
+
+```{r}
+sample(1:10, size = 8, replace = TRUE)
+sample(1:10, size = 8, replace = FALSE)
+```
+
+The first argument can be any vector:
+
+```{r}
+letters
+sample(letters, size = 8, replace = FALSE)
+```
+
+An optional argument `prob` can be used to specify unequal probabilities to obtain
+the values in the sample:
+
+```{r}
+sample(1:4, size = 10, replace = TRUE, prob = c(0.7,0.1,0.1,0.1))
+```
+
+Function `sample.int` is a faster version for sampling from the set `1:n` 
+(among others, this function is very useful for bootstrapping):
+
+```{r}
+sample.int(10, size = 10, replace = TRUE)
+```
+
+
+## Random numbers and seeds
+
+The sampling functions `r***` and `sample` use peudorandom numbers based on 
+the current processor time. This means that running the same code twice will give
+different results if sampling functions are involved:
+
+```{r}
+rnorm(10)
+rnorm(10)
+```
+
+In many cases, this behaviour is desired -- after all, these functions are used 
+to describe the outcome of a random process! 
+However, there is a reproducibility problem if running the same script twice 
+(by different people, at different times, ...) yields different results.
+It is therefore strongly recommended to set a *seed* for the random number generator
+at the beginning of a script:
+
+```{r}
+set.seed(12345) # any number will do
+rnorm(10)
+```
+
+Then, if the code is run again (here, identical code is used to show this 
+behaviour), the results can be reproduced:
+
+```{r}
+set.seed(12345) # important: same number as before!
+rnorm(10)
+```
+

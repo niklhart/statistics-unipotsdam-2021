@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Online material PharMetrX A5 module 2020</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">PharMetrX A5 module 2020</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Overview</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    R tutorials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">R fundamentals</li>
+    <li>
+      <a href="basics.html">Basic syntax</a>
+    </li>
+    <li>
+      <a href="datatypes.html">Data types</a>
+    </li>
+    <li>
+      <a href="subsetting.html">Subsetting</a>
+    </li>
+    <li>
+      <a href="controlflow.html">Control flow</a>
+    </li>
+    <li>
+      <a href="packages.html">R Packages</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">R functions</li>
+    <li>
+      <a href="functioncall.html">Function calls</a>
+    </li>
+    <li>
+      <a href="writefunction.html">Defining a function</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Working with data</li>
+    <li>
+      <a href="dataimport.html">Data import/export</a>
+    </li>
+    <li>
+      <a href="dataframes.html">Manipulating data frames</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Further topics</li>
+    <li>
+      <a href="plotting.html">Plotting</a>
+    </li>
+    <li>
+      <a href="probability.html">Probability &amp; Sampling</a>
+    </li>
+    <li>
+      <a href="odes.html">Solving ODEs</a>
+    </li>
+    <li>
+      <a href="optimization.html">Optimization</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="task-descriptive-stats.html">Task 1: Descriptive statistics</a>
+</li>
+<li>
+  <a href="task-sampling-distr.html">Task 2: Sampling distribution</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Online material PharMetrX A5 module 2020</h1>
+
+</div>
+
+
+<p>This website is part of the online training material for the PharMetrX A5 module 2020, part of the PharMetrX graduate research training program (see <a href="https://www.pharmetrx.de/">here</a> for general information about PharMetrX and <a href="https://www.pharmetrx.de/training/curriculum/statistics-data-analysis.html">here</a> for an overview of the content covered in the module). The material has been created by Niklas Hartung, University of Potsdam (2020), and is distributed under the terms of the Creative Commons License (CC BY-NC-SA 3.0): Attribution-NonCommercial-ShareAlike 3.0 Unported.</p>
+<p>This self-study hands-on material, to be prepared <em>before</em> the one-week module (31 August – 4 September 2020), consists of two parts:</p>
+<ul>
+<li><strong>Tutorials</strong> covering the R programming skills required during the hands-on sessions. Depending on your current experience with R, you might be able to skip parts of this material. Below, an overview on the tutorial content is given. The tutorials themselves can be accessed by clicking on “R Tutorials” in the header.</li>
+<li><strong>Tasks</strong> (hands-on) based on Wilhelm’s screencasts. Please complete this material before the start of the one-week module. Again, the tutorials can be accessed through the navigation bar at the top. You can check your results against the provided reference solutions.</li>
+</ul>
+<p>The following topics are covered in the R tutorials:</p>
+<table>
+<colgroup>
+<col width="29%" />
+<col width="70%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tutorial</th>
+<th align="left">Topic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Basic syntax</td>
+<td align="left">Commands, operators (<code>&lt;-</code>/<code>:</code>/numeric/comparison/logical/<code>()</code>/<code>{}</code>), R help</td>
+</tr>
+<tr class="even">
+<td>Data types</td>
+<td align="left">Vectors, factors, matrices, data frames, lists and functions</td>
+</tr>
+<tr class="odd">
+<td>Subsetting</td>
+<td align="left">Subsetting operators <code>[</code> / <code>[[</code> / <code>$</code>, numeric/logical/character subsetting, subassignments</td>
+</tr>
+<tr class="even">
+<td>Control flow</td>
+<td align="left"><code>if</code>/<code>else</code> statements, <code>for</code>/<code>while</code> loops</td>
+</tr>
+<tr class="odd">
+<td>R packages</td>
+<td align="left">Package installation and use of package functions</td>
+</tr>
+<tr class="even">
+<td>Function calls</td>
+<td align="left">Formal vs. input arguments, default arguments, <code>...</code> argument, non-standard evaluation</td>
+</tr>
+<tr class="odd">
+<td>Defining a function</td>
+<td align="left">Syntax of function arguments and function body, environmental variables</td>
+</tr>
+<tr class="even">
+<td>Data import/export</td>
+<td align="left">Read from and write to <code>.csv</code>, formatting options</td>
+</tr>
+<tr class="odd">
+<td>Manipulating data frames</td>
+<td align="left">Summary, adding/removing columns, subsetting via <code>subset</code>, combining data frames</td>
+</tr>
+<tr class="even">
+<td>Plotting</td>
+<td align="left">Create different plots in base R or with package <code>ggplot2</code></td>
+</tr>
+<tr class="odd">
+<td>Probability&amp;Sampling</td>
+<td align="left">Functions <code>d*</code>/<code>p*</code>/<code>q*</code>/<code>r*</code> (e.g. <code>dnorm</code>), <code>sample</code> (with or without replacement), <code>set.seed()</code></td>
+</tr>
+<tr class="even">
+<td>Solving ODEs</td>
+<td align="left">Syntax of function <code>deSolve::ode</code>, defining the ODE right-hand side</td>
+</tr>
+<tr class="odd">
+<td>Optimization</td>
+<td align="left">Syntax of function <code>optim</code>, defining an objective function</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

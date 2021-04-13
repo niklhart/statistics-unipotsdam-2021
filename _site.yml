@@ -1,0 +1,51 @@
+name: "R-tutorials"
+navbar:
+  title: "Statistics module 2021"
+  left:
+    - text: "Overview"
+      href: index.html
+    - text: "R tutorials"
+      menu:
+        - text: "R fundamentals"
+        - text: "Getting started"
+          href: installation.html
+        - text: "Basic syntax"
+          href: basics.html
+        - text: "Data types"
+          href: datatypes.html
+        - text: "Subsetting"
+          href: subsetting.html
+        - text: "Control flow"
+          href: controlflow.html
+        - text: "R Packages"
+          href: packages.html
+        - text: "-----------"
+        - text: "R functions"
+        - text: "Function calls"
+          href: functioncall.html
+        - text: "Defining a function"
+          href: writefunction.html
+        - text: "-----------"
+        - text: "Working with data"
+        - text: "Data import/export"
+          href: dataimport.html
+        - text: "Manipulating data frames"
+          href: dataframes.html
+        - text: "-----------"
+        - text: "Further topics"
+        - text: "Plotting"
+          href: plotting.html
+        - text: "Probability & Sampling"
+          href: probability.html
+        - text: "Optimization"
+          href: optimization.html
+    - text: "Descriptive statistics"
+      href: task-descriptive-stats.html
+output:
+  html_document:
+    toc: true
+    theme: cosmo
+    highlight: tango
+    toc_float:
+      collapsed: false
+output_dir: "docs"

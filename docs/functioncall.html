@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Function calls</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">PharMetrX A5 module 2020</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Overview</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    R tutorials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">R fundamentals</li>
+    <li>
+      <a href="basics.html">Basic syntax</a>
+    </li>
+    <li>
+      <a href="datatypes.html">Data types</a>
+    </li>
+    <li>
+      <a href="subsetting.html">Subsetting</a>
+    </li>
+    <li>
+      <a href="controlflow.html">Control flow</a>
+    </li>
+    <li>
+      <a href="packages.html">R Packages</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">R functions</li>
+    <li>
+      <a href="functioncall.html">Function calls</a>
+    </li>
+    <li>
+      <a href="writefunction.html">Defining a function</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Working with data</li>
+    <li>
+      <a href="dataimport.html">Data import/export</a>
+    </li>
+    <li>
+      <a href="dataframes.html">Manipulating data frames</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Further topics</li>
+    <li>
+      <a href="plotting.html">Plotting</a>
+    </li>
+    <li>
+      <a href="probability.html">Probability &amp; Sampling</a>
+    </li>
+    <li>
+      <a href="odes.html">Solving ODEs</a>
+    </li>
+    <li>
+      <a href="optimization.html">Optimization</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="task-descriptive-stats.html">Task 1: Descriptive statistics</a>
+</li>
+<li>
+  <a href="task-sampling-distr.html">Task 2: Sampling distribution</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Function calls</h1>
+
+</div>
+
+
+<p>R functions can be called in many different ways. In this tutorial, the logic of argument processing is described.</p>
+<div id="formal-vs.-input-arguments" class="section level2">
+<h2>Formal vs. input arguments</h2>
+<p>All arguments defined in R functions have names, which can be seen in the function help (check this for the examples to follow). They are called <em>formal arguments</em>, to distinguish them from the <em>input arguments</em>, which are used in a function call.</p>
+<p>When calling a function, it is optional to provide the name of a formal argument. For example, function <code>sqrt</code> (square root) has one formal argument, <code>x</code>, and the following calls are both valid:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">sqrt</span>(<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">sqrt</span>(<span class="dt">x=</span><span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<p>If unnamed arguments are provided as inputs to a function with several formal arguments, these are matched <em>by position</em>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">rep.int</span>(<span class="fl">2.3</span>, <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1] 2.3 2.3 2.3 2.3</code></pre>
+<p>In contrast, named arguments provided to a function with several formal arguments are matched <em>by name</em>:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">rep.int</span>(<span class="dt">x =</span> <span class="fl">2.3</span>, <span class="dt">times =</span> <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1] 2.3 2.3 2.3 2.3</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">rep.int</span>(<span class="dt">times =</span> <span class="dv">4</span>, <span class="dt">x =</span> <span class="fl">2.3</span>) <span class="co"># same as above</span></span></code></pre></div>
+<pre><code>## [1] 2.3 2.3 2.3 2.3</code></pre>
+<p>Named and unnamed input arguments can be mixed. In this case, a two-step processing is done:</p>
+<ul>
+<li>first, all named input arguments are matched by name</li>
+<li>then, all unnamed input arguments are matched by position to the <em>remaining</em> formal arguments</li>
+</ul>
+<p>Let’s consider the above example again:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">rep.int</span>(<span class="dt">times =</span> <span class="dv">4</span>, <span class="fl">2.3</span>) <span class="co"># same as above</span></span></code></pre></div>
+<pre><code>## [1] 2.3 2.3 2.3 2.3</code></pre>
+<p>This function call syntax is extremely flexible, but it can also be quite confusing (also for yourself!). The advantage of using unnamed input arguments is that the function call becomes more concise. However, it is generally recommended to use only a very limited number of unnamed input arguments, and to only use these for the first arguments. Moreover, it is recommended to always provide all input arguments in the order of the formal arguments. Some people even recommend using named input arguments exclusively.</p>
+</div>
+<div id="default-argument-values" class="section level2">
+<h2>Default argument values</h2>
+<p>Most R functions define default values for some of their (formal) arguments. As an extreme example, function <code>read.table</code> has 25 formal arguments, but only one of them is mandatory (the <code>file</code> from which to read) – all the others specify settings on how to read the information in <code>file</code>.</p>
+<p>The logic of argument matching described above is done independently of whether a default is defined for a formal argument. However, for the formal arguments with default values, it is optional to provide them as input arguments.</p>
+<p>For example, function <code>log</code> has two formal arguments, <code>x</code> and <code>base</code>. Argument <code>x</code> is mandatory, but <code>base</code> has the default <code>exp(1)</code> (natural logarithm).</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">log</span>(<span class="dv">8</span>)                  <span class="co"># natural log</span></span></code></pre></div>
+<pre><code>## [1] 2.079442</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">log</span>(<span class="dv">8</span>, <span class="dt">base =</span> <span class="kw">exp</span>(<span class="dv">1</span>))   <span class="co"># same as above</span></span></code></pre></div>
+<pre><code>## [1] 2.079442</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">log</span>(<span class="dv">8</span>, <span class="dt">base =</span> <span class="dv">2</span>)        <span class="co"># 2^3 = 8</span></span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+</div>
+<div id="the-argument-..." class="section level2">
+<h2>The argument <code>...</code></h2>
+<p>There is a special formal argument called <code>...</code>. This argument can match any number of input arguments that are not matched by other formal arguments.</p>
+<p>For example, function <code>c</code> has a <code>...</code> argument, and hence, it can accept any number of inputs:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">c</span>(<span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] 1 2 3</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw">c</span>(<span class="dv">234</span>,<span class="dv">553</span>)</span></code></pre></div>
+<pre><code>## [1] 234 553</code></pre>
+<p>Argument <code>...</code> can match both named and unnamed inputs. For example, <code>c</code> uses named arguments to create a named vector.</p>
+<p>Care must be taken to avoid matching another formal argument accidentally. For example, function <code>data.frame</code> has a <code>...</code> argument. Now imagine you want to create a data frame with two columns <code>row.names</code> and <code>column.names</code>:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">data.frame</span>(<span class="dt">row.names    =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>), </span>
+<span id="cb25-2"><a href="#cb25-2"></a>           <span class="dt">column.names =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;c&quot;</span>))</span></code></pre></div>
+<pre><code>##   column.names
+## A            a
+## B            b
+## C            c</code></pre>
+<p>The result is not as desired because <code>row.names</code> is a formal argument of function <code>data.frame</code>.</p>
+</div>
+<div id="non-standard-evaluation" class="section level2">
+<h2>Non-standard evaluation</h2>
+<p>If you know another programming language, you will most likely be surprised by a feature called <em>non-standard evaluation</em>: R functions can access not only the <em>values</em> of the input arguments passed to them, but also the <em>commands</em> that resulted in these values.</p>
+<p>For example, the axis labels in the following plot are produced by non-standard evaluation:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>   <span class="co"># creates the vector [1 2 3 ... 10]</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="kw">plot</span>(x, x<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="functioncall_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>However, non-standard evaluation can do much more than just creating labels. For example, the <code>subset</code> function (see tutorial “Manipulating data frames” for more details) uses non-standard evaluation to evaluate the input argument in a different context. The following call to <code>subset</code> evaluates <code>x</code> and <code>y</code> not as a variable in the workspace, but as a <em>column</em> in the first argument, <code>df</code>:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">y =</span> <span class="dv">4</span><span class="op">:</span><span class="dv">6</span>)</span>
+<span id="cb28-2"><a href="#cb28-2"></a>df</span></code></pre></div>
+<pre><code>##   x y
+## 1 1 4
+## 2 2 5
+## 3 3 6</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">subset</span>(df, x <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>y <span class="op">&lt;</span><span class="st"> </span><span class="dv">6</span>)</span></code></pre></div>
+<pre><code>##   x y
+## 2 2 5</code></pre>
+<p>Therefore, the above call actually means</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="kw">subset</span>(df, df<span class="op">$</span>x <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>df<span class="op">$</span>y <span class="op">&lt;</span><span class="st"> </span><span class="dv">6</span>)</span></code></pre></div>
+<p>Non-standard evaluation yourself can become quite complicated and a detailed description is well beyond the scope of this tutorial, but it is important to be aware that such as feature exists.</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

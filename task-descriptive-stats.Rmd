@@ -1,0 +1,579 @@
+---
+title: "Task 1: Descriptive statistics"
+---
+
+<!--JavaScript function for a button to show/hide solutions-->
+<script>
+function showSolution(exercise) {
+    var x = document.getElementById(exercise);
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+</script>
+ 
+<!--Main R markdown file-->
+
+We consider a dataset on risk factors associated with low infant birth weight
+(modified from the `MASS` **R** package). First, we set the working directory
+and read the dataset:
+
+```{r, eval = FALSE}
+setwd("~/work/Teaching/PharmetrX/A5_2020/hands on/task-descriptive-stats")
+birthwt <- read.csv("birthwt.csv")
+```
+
+```{r load-data, echo = FALSE}
+birthwt <- read.csv("birthwt.csv")
+```
+
+The `birthwt` dataset contains the following columns:
+
+* `age`: mother's age in years
+* `lwt`: mother's weight in pounds
+* `race`: mother's race
+* `smoke`: smoking status during pregnancy
+* `ht`: history of hypertension
+* `ftv`: number of physician visits during the first trimester of pregnancy
+* `bwt`: birth weight in grams
+
+```{r summary-stats}
+summary(birthwt)
+```
+
+**Exercise**  
+Determine the scale of measurement for each variable: 
+
+* nominal, 
+* ordinal, 
+* count (discrete numeric) 
+* or continuous?
+
+<!--Solution to exercise 1-->
+<button onclick='showSolution("solutionEx1")'>Show/hide solution</button>
+<div id="solutionEx1" style = "display:none">
+Answer: 
+
+* `age`: continuous
+* `lwt`: continuous
+* `race`: nominal
+* `smoke`: nominal
+* `ht`: nominal
+* `ftv`: count
+* `bwt`: continuous
+</div>
+
+------------------------------------------------------------
+
+## Representation of a single variable
+
+### Continuous variable
+
+#### Numerical description
+
+```{r}
+bwt <- birthwt$bwt
+```
+
+Measures of location
+```{r}
+mean(bwt)
+median(bwt)
+```
+
+Measures of dispersion
+```{r}
+sd(bwt)       # (empirical) standard deviation
+var(bwt)      # (empirical) variance
+range(bwt)    # c(min(x), max(x))
+IQR(bwt)      # interquartile range
+```
+
+Sample quantiles
+```{r}
+quantile(bwt)                       # default: quartiles 
+quantile(bwt, probs = c(0.2,0.8))
+```
+
+Sample coefficient of variation (measure of dispersion relative to location;
+dimensionless). 
+```{r}
+cv <- sd(bwt)/mean(bwt)
+cv
+```
+
+Sample mean and sample median both are a measure of location, and 
+sample standard deviation and interquartile range both are a measure of dispersion.
+The main difference between these measures is that sample mean and sample standard
+deviation are more affected by outliers than sample median and interquartile range,
+respectively.
+
+
+#### Graphical description
+
+Continuous variables are usually displayed in a *histogram*, a *boxplot*, 
+or a *dot plot* (1D scatter plot).
+
+A **histogram** groups values into predefined intervals (''binning'') and represents
+counts in these intervals:
+```{r}
+hist(bwt)                # default intervals
+hist(bwt, breaks = 2)    # coarser intervals
+hist(bwt, breaks = 100)  # finer intervals
+```
+
+Advantages:
+
+* multimodality and skewness easy to see
+
+Disadvantages:
+
+* 2D representation of 1D data (difficult to group)
+* representation depends on interval width
+
+A **boxplot** represents summary statistics depending on sample quantiles:
+
+* median
+* quartiles
+* ''fences''
+    + lower fence: at smallest observation larger than $q_{0.25} - 1.5\cdot IQR$
+    + upper fence: at largest observation smaller than $q_{0.75} + 1.5\cdot IQR$ 
+* outliers (values outside fences, if any)
+
+```{r}
+boxplot(bwt)
+```
+
+Advantages:
+
+* 1D representation of 1D data (can be grouped)
+* outliers are easily spotted
+
+Disadvantages:
+
+* multimodality not visible
+* sample size not visible
+
+A (continuous) *dot plot* shows individual data points along the x-axis, while 
+scattering (''jittering'') values along the y-axis to avoid overplotting.
+```{r}
+stripchart(bwt, method = "jitter")
+```
+
+Advantages:
+
+* Shows the actual data!
+* ''almost 1D'' representation of 1D data (can be grouped)
+
+Disadvantages:
+
+* only adequate for small datasets
+
+------------------------------------------------------------
+
+### Discrete variable
+
+Generally, a discrete variable is summarized by counting number of datapoints
+in each category; this information can be displayed directly as a *table* 
+(either absolute or relative frequencies) or 
+graphically as a *barplot* or a (discrete) *dot plot*.
+
+```{r disp-single-discrete}
+race <- birthwt$race
+table(race)                 # absolute frequencies
+table(race)/length(race)    # relative frequencies
+barplot(table(race))
+dotchart(table(race))
+```
+
+* Discrete *numeric* variables (i.e., count data) can be further summarized 
+  numerically, similar to continuous variables. In particular we can compute 
+  their mean, variance/standard deviation, median (or, more generally, 
+  quantiles), minimum/maximum, and interquartile range.
+* Rather than using the coefficient of variation, the *index of dispersion* is 
+  often computed (ratio of sample variance to sample mean).
+  It is 1 for Poisson distributed data; when the dispersion index is $>1$,
+  data are called overdispersed and for a dispersion index $<1$, they are called
+  underdispersed.
+* Count variables with many categories are sometimes displayed as if they were 
+  continuous (e.g., via a histogram or boxplot). However, a histogram and a 
+  barplot are not the same!
+
+**Exercise**  
+
+Classify the frequency of physician visits according to its dispersion index.
+
+<!--Solution to exercise 2-->
+<button onclick='showSolution("solutionEx2")'>Show/hide solution</button>
+<div id="solutionEx2" style = "display:none">
+Answer:
+```{r}
+var(birthwt$ftv)/mean(birthwt$ftv)
+```
+$\Rightarrow$ dispersion index greater than one, hence frequency of physician visits is 
+overdispersed.
+</div>
+
+------------------------------------------------------------
+
+### Labelling
+
+It is important to use meaningful axis labels and titles, such as in the 
+following examples:
+
+```{r}
+barplot(table(race), ylab = "Frequency", main = "Race distribution in the birthwt dataset")
+hist(bwt, xlab = "Infant birthweight in [g]", main =  "")
+```
+
+**Exercise**  
+Summarize each variable in the `birthwt` dataset appropriately. Use adequate
+x/y labels and a title.
+
+<!--Solution to exercise 3-->
+<button onclick='showSolution("solutionEx3")'>Show/hide solution</button>
+<div id="solutionEx3" style = "display:none">
+Answer:
+```{r}
+hist(birthwt$age, xlab = "Age of mother in years", main = "")
+hist(birthwt$lwt, xlab = "Weight of mother in pounds", main = "")
+barplot(table(birthwt$race), xlab = "Mother's race")
+barplot(table(birthwt$smoke), xlab = "Did the mother smoke during pregnancy?")
+barplot(table(birthwt$ht), xlab = "Mother with history of hypertension?")
+barplot(table(birthwt$ftv), xlab = "Frequency of physician visits in first trimester")
+hist(birthwt$bwt, xlab = "Birthweight in grams", main = "")
+```
+</div>
+
+------------------------------------------------------------
+
+## Relationships between two variables
+
+### Both continuous
+
+Two continuous variables are best shown in a *scatterplot*:
+
+```{r}
+plot(birthwt$age, birthwt$bwt)
+```
+
+The degree of linear association between two continuous variables can be 
+expressed by the empirical correlation coefficient $r\in[-1,1]$:
+
+```{r}
+cor(birthwt$age, birthwt$bwt)
+```
+
+------------------------------------------------------------
+
+### One continuous, one discrete
+
+The values of *non-numeric* discrete variables divide the dataset into different
+groups. For each of these groups, summary statistics can be computed. 
+
+For graphical display, boxplots and dot plots are well suited since they can be
+placed side by side:
+
+```{r}
+boxplot(bwt ~ race)
+stripchart(bwt ~ race, method = "jitter")
+```
+
+------------------------------------------------------------
+
+### Both discrete
+
+Two discrete variables are best summarized via a *joint frequency table*. To 
+avoid potential confusion between variables with the same set of possible 
+values, use named arguments:
+
+```{r}
+(tab <- table(ht=birthwt$ht, smoke=birthwt$smoke))
+```
+
+A graphical representation of 2 discrete variables is less commonly used than a
+tabular representation. One possibility is the *mosaic plot*:
+
+```{r}
+mosaicplot(tab)
+```
+
+Alternatively, a *small multiples* arrangement of *dotcharts* (in base **R**, 
+the default labelling is unfortunate for both these possibilities).
+
+```{r}
+colnames(tab) <- paste0('smoke: ', colnames(tab))
+rownames(tab) <- paste0('ht: ', rownames(tab))
+dotchart(tab)
+```
+
+... or *stacked/grouped barplots* (this is difficult to do in base **R**, 
+therefore one best uses a dedicated **R** package, e.g. `ggplot2`):
+
+```{r, eval = FALSE}
+install.packages("ggplot2") #if not done already
+```
+
+```{r}
+library(ggplot2)
+ggplot(birthwt) + geom_bar(aes(x=smoke, fill = ht))
+```
+
+**Exercise**  
+Represent the following relationships appropriately: 
+
+* `race` and `ht`
+* `smoke` and `age`
+* `ftv` and `lwt`
+
+<!--Solution to exercise 4-->
+<button onclick='showSolution("solutionEx4")'>Show/hide solution</button>
+<div id="solutionEx4" style = "display:none">
+Answer:
+```{r}
+table(race=birthwt$race,ht=birthwt$ht)
+boxplot(birthwt$age~birthwt$smoke)
+plot(birthwt$ftv,birthwt$lwt, xlab = "Number of first trimester visits",
+     ylab = "Mother's body weight in pounds")
+```
+</div>
+
+------------------------------------------------------------
+
+## Data post-processing
+
+### Numerical transformations
+
+Sometimes a variable is transformed numerically (often, *log-transformed*) before it is
+represented numerically or graphically. For illustration, we consider 
+the `Animals` dataset from the `MASS` **R** package (body and brain size for
+different animal species):
+
+```{r, eval = FALSE}
+install.packages("MASS") #if not done already
+```
+
+```{r}
+animals <- MASS::Animals
+plot(animals$body,animals$brain)
+plot(animals$body,animals$brain, log = "xy")
+```
+
+**Exercise**  
+
+Make sure you understand which summary statistics commute with a monotonously 
+increasing data transformation like the log-transform, and which ones don't 
+(commutation means that if $T(X)$ is a statistic 
+and $f$ a data transformation, then $f(T(X)) = T(f(X))$).
+
+<!--Solution to exercise 5-->
+<button onclick='showSolution("solutionEx5")'>Show/hide solution</button>
+<div id="solutionEx5" style = "display:none">
+Answer: 
+
+* mean, standard deviation/variance and range/IQR don't commute with transformation
+* all quantile-based summary statistics (median, max/min, quartiles) commute with monotonous transformations
+</div>
+
+------------------------------------------------------------
+
+### Subsetting
+
+Only a subset of data might be relevant for a particular analysis. Use function
+`subset` to create a sub-dataset (see tutorial "Manipulating data frames").
+
+For example, we might want to consider only the mothers with hypertension:
+
+```{r}
+subset(birthwt, ht == "yes")
+```
+
+------------------------------------------------------------
+
+### Categorisation
+
+Numeric variables (continuous or count) can be categorized into ordinal variables.
+Unfortunately, there is no such function in base R, but the categorization can be
+done manually using functions `findInterval` and `factor`: 
+
+```{r}
+idx <- findInterval(birthwt$ftv, c(-0.5,0.5,1.5)) 
+catftv <- factor(c("never","once","several")[idx], ordered = TRUE)
+head(catftv)
+```
+
+------------------------------------------------------------
+
+## Relationship between three variables
+
+### Three (or more) continuous
+    
+A *scatterplot matrix* of several continuous variables is a matrix of 
+scatterplots for each possible combination of continuous variables.
+
+```{r}
+plot(birthwt[c('bwt','lwt','age')])
+```
+
+Advantages:  
+
+* Generalizes to an arbitrary number of continuous variables
+* Alternatives are worse (3D point plots...)
+
+Disadvantages:  
+
+* Fails to accurately represent associations if several covariates are collinear
+  (this effect is called "confounding")
+
+------------------------------------------------------------
+  
+### Two continuous, one discrete
+    
+All data can be shown in a scatterplot, with groups encoded by symbols or 
+colors (or both). 
+
+```{r}
+plot(birthwt$age,birthwt$bwt, 
+     col = birthwt$race, 
+     pch = as.numeric(birthwt$race),
+     xlab = "Mother's age in years",
+     ylab = "Birthweight in grams")
+legend("bottomright", legend = unique(as.character(birthwt$race)), 
+       col = unique(birthwt$race), 
+       pch = unique(as.numeric(birthwt$race)))
+```
+
+Alternatively, "small multiples" can be shown (a row/column/matrix of 
+subfigures, each with a common scale).
+
+------------------------------------------------------------
+
+### One continuous, two discrete
+
+The most common graphical representation is a set of small multiples 
+(corresponding to one discrete variable), each with a suitable representation 
+of one continuous and one discrete variable (see above). This is difficult to do
+in base **R**, therefore one best uses a dedicated **R** package, e.g. `ggplot2`:
+
+```{r}
+ggplot(birthwt, aes(x=smoke, y=bwt)) + facet_wrap("race") + geom_boxplot()
+```
+
+Usually, a confounder creates the small multiples, whereas the variable of 
+interest is displayed within these.
+
+------------------------------------------------------------
+
+### Three discrete
+
+Three discrete variables can also be summarized via their 3D
+*joint frequency table*: 
+
+```{r}
+table(race=birthwt$race, smoke=birthwt$smoke, ht=birthwt$ht)
+```
+
+To reduce this to a 2D representation (e.g., for a publication/report), 
+a nested table can be created. In theory, mosaic plots could be 
+created for three variables, but these are almost impossible to understand.
+
+------------------------------------------------------------
+
+## Repeated measurements data
+
+Lastly, we consider a scenario where repeated measurements are taken 
+(longitudinal instead of cross-sectional data). In this case, observations are 
+linked by a line. Data pertaining to different time series of measurements are 
+not connected. This is difficult to do in base **R**, therefore one best uses a
+dedicated  **R** package, e.g. `ggplot2`:
+
+```{r}
+ggplot(Indometh, aes(x=time,y=conc,group=Subject)) + geom_line() + geom_point()
+```
+
+Grouping of repeated measurement series can be done with one of the techniques
+described above for discrete variables, e.g. *coloring* or 
+*small multiples*.
+
+------------------------------------------------------------
+
+## Further exercises
+
+1)  Represent the following relationships appropriately:  
+* `smoke`, `lwt` and `bwt`
+* `age` and `bwt` of mothers smoking during pregnancy
+* `smoke` and `bwt` of mothers over 30 that never went to a doctor during 
+    first trimester of pregnancy
+
+    <!--Solution to exercise E-1-->
+    <button onclick='showSolution("solutionExE1")'>Show/hide solution</button>
+    <div id="solutionExE1" style = "display:none">
+    ```{r}
+    plot(birthwt$lwt, birthwt$bwt, col = birthwt$smoke, 
+         xlab = "Mother's weight in pounds",
+         ylab = "Birth weight in grams",
+         main = "Stratification by smoking status")
+    legend("bottomright", legend = unique(as.character(birthwt$smoke)), 
+           col = unique(as.numeric(birthwt$smoke)), pch = 1)
+    ```
+    
+    ```{r}
+    smok <- subset(birthwt, smoke == "yes")
+    plot(smok$age, smok$bwt, xlab = "Mother's age in years",
+         ylab = "Birth weight in grams",
+         main = "Association for smoking mothers")
+    ```
+    
+    ```{r}
+    cpx <- subset(birthwt, ftv == 0 & age > 30)
+    boxplot(cpx$bwt ~ cpx$smoke, xlab = "Smoking status during pregnancy",
+            main = "Mothers over 30 without first trimester visit")
+    ```
+    </div>
+
+2)  Consider the `anscombe` datasets in base R. This data frame contains eight columns,
+    `x1`-`x4` and `y1`-`y4`. Create four different datasets from it, the first containing
+    columns `x1`,`y1`, the second `x2`,`y2`, etc. Then do the following:
+    * Compute numerical summary statistics of these four datasets. Which pattern
+      do you observe?
+    * Visualize the four datasets graphically. What can you conclude?
+    
+    <!--Solution to exercise E-2-->
+    <button onclick='showSolution("solutionExE2")'>Show/hide solution</button>
+    <div id="solutionExE2" style = "display:none">
+    Answer: sample mean and sd for both variables, as well as their empirical 
+    correlation coefficient, agree for all 4 datasets. However, as can be seen 
+    from the graphics, the four datasets are completely different! These 
+    examples illustrate the usefulness of graphical analysis and the danger when
+    solely presenting summary statistics.
+    </div>
+    
+3)  Imagine two variables, one of them representing count data and
+    the other one either categorical or continuous data. Determine an 
+    appropriate joint graphical representation of the two variables, assuming  
+    * the range of counts is very small (say, 3)
+    * the range of counts is very large (say, 100)
+    * the range of counts is somewhere in between (say, 10)  
+    (In total, there are six scenarios to consider, e.g. 
+    "other variable is categorical" and "small range of counts")
+    
+    <!--Solution to exercise E-3-->
+    <button onclick='showSolution("solutionExE3")'>Show/hide solution</button>
+    <div id="solutionExE3" style = "display:none">
+    Answer:
+    
+    * small range of counts, other variable is categorical: 
+      joint frequency table using raw counts
+    * small range of counts, other variable is continuous:
+      one boxplot / stripchart of other variable per count
+    * medium range of counts: first categorize to smaller number of categories,
+      then proceed as described for small range of counts.
+    * large range of counts, other variable is categorical: one boxplot / stripchart
+      of counts per category
+    * large range of counts, other variable is continuous: scatterplot
+    
+    </div>
+
+ 

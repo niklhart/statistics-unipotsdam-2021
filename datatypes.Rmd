@@ -1,0 +1,248 @@
+---
+title: "Data types"
+---
+
+This tutorial covers the fundamental data types in R:
+
+* Vectors
+* Factors
+* Matrices
+* Data frames
+* Lists
+* Functions
+
+## Vectors
+
+A vector contains one or several values of a particular type. The most important
+types are:
+
+- **numeric** (e.g., `1.41434`)
+- **integer** (e.g., `5` or `-2`)
+- **logical** (`TRUE` or `FALSE`)
+- **character** (e.g., `"tutorial"`, `"peanut"`, ...)
+
+In addition, each type has a special value `NA`, indicating missing values.
+
+Vectors of a certain length can be allocated (initialized) as follows:
+
+```{r}
+numeric(4)
+integer(4)
+logical(3)
+character(6)
+```
+
+Vectors can be interconverted between the different formats:
+
+```{r}
+as.character(c(2.34,1.42,0))
+as.logical(c(2.34,1.42,0))
+as.numeric(c(TRUE,FALSE))
+as.character(c(TRUE,FALSE))
+```
+
+
+In most cases, the distinction between *numeric* and *integer* types is not very
+important, since they are almost always automatically converted to the required format.
+
+Values/vectors can be combined using the command `c`:
+
+```{r}
+c(1, numeric(2), 2.3)
+c("a", "b", "c")
+c(TRUE, TRUE, FALSE)
+```
+
+Regular sequences of numeric vectors can be created in different ways, too:
+
+(1) the `:` command:
+
+```{r}
+1:4
+2.5:4.5
+```
+
+(2) function `seq()`:
+
+```{r}
+seq(from = 1, to = 7, by = 2)
+```
+
+Vectors can also be *named*. Then, each element of the vector has its own name:
+
+```{r}
+c(1,2)     # unnamed values
+c(a=1,b=2) # values named "a" and "b"
+```
+
+## Factors
+
+The data type "factor" is designed for categorical variables, i.e. variables with
+a pre-defined set of values (usually, the number of categories is much smaller 
+than the length of the vector).
+
+```{r}
+x <- factor(c("small","medium","small","big"))
+x
+```
+
+The possible values are called "levels".
+
+```{r}
+levels(x)
+```
+
+It is also possible for a factor to have a level which is not used in the vector
+itself (for example, this allows to document that a certain category was not 
+observed). In this case, define the levels as an input argument to `factor`:
+
+```{r}
+y <- factor(c("small","medium","small"), levels = c("small","medium","big"))
+y
+```
+
+Factors can be *unordered* (the default) or *ordered* -- corresponding to nominal and 
+ordinal data types. For example, variable `y` above could be encoded as ordered.
+In this case, always use argument `levels`, and in increasing order:
+
+```{r}
+y <- factor(c("small","medium","small"), levels = c("small","medium","big"), ordered = TRUE)
+y
+```
+Ordered factors can be compared using comparison operators (see Tutorial 
+"Basic syntax"), quantiles can be determined, and many plotting functions respect
+the ordering during display.
+
+For efficiency, factors are implemented on top of integer vectors with the levels
+as display values. This has important consequences for manipulation of factors 
+because many functions trigger a conversion of a factor to its underlying type 
+"integer", which is generally not what you want. 
+For example, concatenation first converts `y` to integer, then to character, 
+to produce a vector consistent with the second argument:
+
+```{r}
+c(y, "small")
+```
+
+## Matrices
+
+Matrices can be created using function `matrix()`. Arguments `nrow`/`ncol` 
+specify the size of the matrix, and one of them can be left blank.
+
+```{r}
+matrix(1:6, nrow = 3)
+```
+
+For matrices, the operator `*` denotes *element-wise multiplication*. For 
+*matrix multiplication* (which is what you often want), use `%*%` instead of `*`:
+
+```{r}
+M <- matrix(1:4, nrow = 2)
+M
+x <- matrix(1:2, nrow = 2)
+x
+M %*% x
+```
+
+Invertible (square) matrices can be inverted using function `solve`:
+
+```{r}
+solve(M)
+```
+
+Several vectors/matrices can also be combined by row or column using functions
+`rbind` and `cbind`:
+
+```{r}
+rbind(1:3,4:6)  # arguments interpreted as row vectors
+cbind(1:3,4:6)  # arguments interpreted as column vectors
+cbind(M,M)      # returns matrix (M M)
+                # returns matrix (M)
+rbind(M,M)      #                (M)
+```
+
+## Data frames
+
+Data frames are designed to hold data. It is a tabular format, similar to a 
+matrix, but where different columns can have different types 
+(e.g. numeric or character). In many cases, each row corresponds to a different 
+observation/record, whereas each column corresponds to one observable quantity.
+
+Data frames can be defined as follows:
+
+```{r}
+t  <- c(1, 2, 3)
+id  <- c("a", "b", "c")
+df <- data.frame(time = t, ids = id)
+df
+```
+
+For unnamed arguments, `data.frame()` uses the argument names as column names:
+```{r}
+R  <- c(1, 2, 3)
+df <- data.frame(R)
+df
+```
+
+Most of the time, data frames will be read from a tabular data file (e.g., 
+a .csv file) -- see Tutorial "Data import/export". Often, data frames need 
+further post-processing like subsetting. This is covered
+in Tutorial "Manipulating data frames".
+
+## Lists
+
+A list is like a vector, but it allows to hold heterogeneous data. Like vectors,
+lists can be unnamed or named, which depends on whether argument names are provided
+to the `list` function (most often, named lists are used):
+
+```{r}
+list(1:3,
+     "A",
+     data.frame(r=1:3)
+)
+list(x = 1:3,
+     y = "A",
+     z = data.frame(r=1:3)
+)
+```
+
+Lists can also be nested:
+
+```{r}
+list(x = 1:3,
+     y = list(z = 1)
+)
+```
+
+## Functions
+
+Here a very short introduction to functions is given. Further details about 
+functions are provided in the tutorials "Function calls" and "Defining a function".
+
+Each function consist of three parts: 
+
+* the formal arguments (including argument names and optionally default values)
+* the function body (the actual function content)
+* an environment in which it was defined (see Tutorial "Defining a function")
+
+All R functions return exactly one value. More complex output must be provided
+in a suitable data format. Often, this is a list.
+
+R features *first-class functions*. This means that functions are a data type as
+any other one:
+
+* functions can be passed as arguments to other functions
+* functions can be stored in lists
+* functions can be modified (advanced)
+
+Typing a function name at the console reveals 
+the content of a function. For almost all base R functions, the output is 
+extremely difficult to read. Here's an easy example, function `force`, 
+which just evaluates its input.
+
+```{r}
+force
+```
+
+Here, `x` is the single formal argument, `x` is also the function body, and the
+function environment is the (namespace of the) "base" package.
